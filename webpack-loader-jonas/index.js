@@ -1,3 +1,3 @@
 export default function loader(input) {
-    return "<script>alert('Hello, world!')</script>"
+    return `function showAlert() { alert('Hello, world!'); } showAlert()`;
 }

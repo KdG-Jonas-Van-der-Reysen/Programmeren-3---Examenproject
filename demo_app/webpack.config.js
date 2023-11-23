@@ -20,19 +20,10 @@ module.exports = {
                 use: [MiniCssExtractPlugin.loader, { loader: 'css-loader' }]
             },
             {
-                test: /\.tsx$/,
+                test: /\.ts(x?)$/,
                 use: [
                     {
                         loader: 'webpack-loader-jonas'
-                    }
-                ]
-            },
-            {
-                test: /\.ts(x?)$/,
-                exclude: /node_modules/,
-                use: [
-                    {
-                        loader: 'ts-loader'
                     }
                 ]
             },
