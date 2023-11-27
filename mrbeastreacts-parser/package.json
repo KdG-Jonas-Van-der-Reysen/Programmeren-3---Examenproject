@@ -4,8 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "antlr": "cd src/resources && java -cp ../resources/antlr-4.13.1-complete.jar org.antlr.v4.Tool -o ../ts/generated -visitor -Dlanguage=TypeScript mrbeastreacts.g4"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "antlr4": "^4.13.1-patch-1"
+  }
 }
