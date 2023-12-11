@@ -40,13 +40,13 @@ function Hello() {
         .appendChild(
             document.body.createElement("h1")
             .appendChild(
-                document.createTextNode("Hello there!"
+                document.createTextNode("Hello there!")
             )
         )
         .appendChild(
             document.body.createElement("h2")
             .appendChild(
-                document.createTextNode("Welcome to our website"
+                document.createTextNode("Welcome to our website")
             )
         )
     );

@@ -1,0 +1,32 @@
+{
+  "name": "mrbeastreacts-parser",
+  "version": "1.0.0",
+  "private": true,
+  "author": "Jonas Van der Reysen",
+  "license": "MIT",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node dist/index.js",
+    "test": "jest",
+    "antlr": "cd src/resources && java -cp ../resources/antlr-4.13.1-complete.jar org.antlr.v4.Tool -o ../ts/generated -visitor -Dlanguage=TypeScript mrbeastreacts.g4"
+  },
+  "dependencies": {
+    "antlr4": "^4.13.1-patch-1",
+    "fs": "^0.0.1-security"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.19.1",
+    "@babel/preset-env": "^7.19.1",
+    "@types/jest": "^28.1.1",
+    "@typescript-eslint/eslint-plugin": "^5.36.1",
+    "@typescript-eslint/parser": "^5.36.1",
+    "babel-jest": "^28.0.0",
+    "eslint": "^8.23.0",
+    "jest": "^28.1.3",
+    "ts-jest": "^28.0.8",
+    "typescript": "^4.8.2"
+  }
+}
