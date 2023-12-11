@@ -36,13 +36,13 @@ export default class JactParser extends Parser {
 	public static readonly T__14 = 15;
 	public static readonly T__15 = 16;
 	public static readonly T__16 = 17;
-	public static readonly T__17 = 18;
-	public static readonly ID = 19;
-	public static readonly INT = 20;
-	public static readonly FLOAT = 21;
-	public static readonly BOOL = 22;
-	public static readonly STRING = 23;
-	public static readonly VOID = 24;
+	public static readonly ID = 18;
+	public static readonly INT = 19;
+	public static readonly FLOAT = 20;
+	public static readonly BOOL = 21;
+	public static readonly STRING = 22;
+	public static readonly VOID = 23;
+	public static readonly WS = 24;
 	public static readonly EOF = Token.EOF;
 	public static readonly RULE_program = 0;
 	public static readonly RULE_statement = 1;
@@ -61,8 +61,8 @@ export default class JactParser extends Parser {
                                                             "'const'", "'let'", 
                                                             "'var'", "'function'", 
                                                             "') {'", "'}'", 
-                                                            "','", "'int'", 
-                                                            "'float'", "'bool'", 
+                                                            "','", "'number'", 
+                                                            "'boolean'", 
                                                             "'string'", 
                                                             null, null, 
                                                             null, null, 
@@ -76,10 +76,10 @@ export default class JactParser extends Parser {
                                                              null, null, 
                                                              null, null, 
                                                              null, null, 
-                                                             null, "ID", 
-                                                             "INT", "FLOAT", 
-                                                             "BOOL", "STRING", 
-                                                             "VOID" ];
+                                                             "ID", "INT", 
+                                                             "FLOAT", "BOOL", 
+                                                             "STRING", "VOID", 
+                                                             "WS" ];
 	// tslint:disable:no-trailing-whitespace
 	public static readonly ruleNames: string[] = [
 		"program", "statement", "printStatement", "variableDeclaration", "variableMemoryTypeDeclaration", 
@@ -110,14 +110,20 @@ export default class JactParser extends Parser {
 			this.state = 26;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 528132) !== 0)) {
+			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 265988) !== 0)) {
 				{
 				this.state = 24;
 				this._errHandler.sync(this);
 				switch (this._input.LA(1)) {
-				case 19:
+				case 2:
 					{
 					this.state = 20;
+					this.printStatement();
+					}
+					break;
+				case 18:
+					{
+					this.state = 21;
 					this.statement();
 					}
 					break;
@@ -125,20 +131,14 @@ export default class JactParser extends Parser {
 				case 9:
 				case 10:
 					{
-					this.state = 21;
+					this.state = 22;
 					this.variableDeclaration();
 					}
 					break;
 				case 11:
 					{
-					this.state = 22;
-					this.functionDeclaration();
-					}
-					break;
-				case 2:
-					{
 					this.state = 23;
-					this.printStatement();
+					this.functionDeclaration();
 					}
 					break;
 				default:
@@ -305,35 +305,35 @@ export default class JactParser extends Parser {
 			this.state = 55;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
-			case 20:
+			case 19:
 				this.enterOuterAlt(localctx, 1);
 				{
 				this.state = 49;
 				this.match(JactParser.INT);
 				}
 				break;
-			case 21:
+			case 20:
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 50;
 				this.match(JactParser.FLOAT);
 				}
 				break;
-			case 22:
+			case 21:
 				this.enterOuterAlt(localctx, 3);
 				{
 				this.state = 51;
 				this.match(JactParser.BOOL);
 				}
 				break;
-			case 23:
+			case 22:
 				this.enterOuterAlt(localctx, 4);
 				{
 				this.state = 52;
 				this.match(JactParser.STRING);
 				}
 				break;
-			case 19:
+			case 18:
 				this.enterOuterAlt(localctx, 5);
 				{
 				this.state = 53;
@@ -386,7 +386,7 @@ export default class JactParser extends Parser {
 			this.state = 65;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la===19) {
+			while (_la===18) {
 				{
 				{
 				this.state = 62;
@@ -426,7 +426,7 @@ export default class JactParser extends Parser {
 			this.state = 78;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===19) {
+			if (_la===18) {
 				{
 				this.state = 70;
 				this.parameter();
@@ -504,7 +504,7 @@ export default class JactParser extends Parser {
 			{
 			this.state = 84;
 			_la = this._input.LA(1);
-			if(!((((_la) & ~0x1F) === 0 && ((1 << _la) & 17268736) !== 0))) {
+			if(!((((_la) & ~0x1F) === 0 && ((1 << _la) & 8617984) !== 0))) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -534,24 +534,24 @@ export default class JactParser extends Parser {
 	2,1,2,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,4,1,4,1,5,1,5,1,5,1,5,1,5,1,
 	5,3,5,56,8,5,1,6,1,6,1,6,1,6,1,6,1,6,5,6,64,8,6,10,6,12,6,67,9,6,1,6,1,
 	6,1,7,1,7,1,7,5,7,74,8,7,10,7,12,7,77,9,7,3,7,79,8,7,1,8,1,8,1,8,1,8,1,
-	9,1,9,1,9,0,0,10,0,2,4,6,8,10,12,14,16,18,0,2,1,0,8,10,2,0,15,18,24,24,
+	9,1,9,1,9,0,0,10,0,2,4,6,8,10,12,14,16,18,0,2,1,0,8,10,2,0,15,17,23,23,
 	88,0,26,1,0,0,0,2,29,1,0,0,0,4,32,1,0,0,0,6,38,1,0,0,0,8,47,1,0,0,0,10,
 	55,1,0,0,0,12,57,1,0,0,0,14,78,1,0,0,0,16,80,1,0,0,0,18,84,1,0,0,0,20,25,
-	3,2,1,0,21,25,3,6,3,0,22,25,3,12,6,0,23,25,3,4,2,0,24,20,1,0,0,0,24,21,
+	3,4,2,0,21,25,3,2,1,0,22,25,3,6,3,0,23,25,3,12,6,0,24,20,1,0,0,0,24,21,
 	1,0,0,0,24,22,1,0,0,0,24,23,1,0,0,0,25,28,1,0,0,0,26,24,1,0,0,0,26,27,1,
-	0,0,0,27,1,1,0,0,0,28,26,1,0,0,0,29,30,5,19,0,0,30,31,5,1,0,0,31,3,1,0,
+	0,0,0,27,1,1,0,0,0,28,26,1,0,0,0,29,30,5,18,0,0,30,31,5,1,0,0,31,3,1,0,
 	0,0,32,33,5,2,0,0,33,34,5,3,0,0,34,35,3,10,5,0,35,36,5,4,0,0,36,37,5,1,
-	0,0,37,5,1,0,0,0,38,39,3,8,4,0,39,40,5,5,0,0,40,41,5,19,0,0,41,42,5,6,0,
+	0,0,37,5,1,0,0,0,38,39,3,8,4,0,39,40,5,5,0,0,40,41,5,18,0,0,41,42,5,6,0,
 	0,42,43,3,18,9,0,43,44,5,7,0,0,44,45,3,10,5,0,45,46,5,1,0,0,46,7,1,0,0,
-	0,47,48,7,0,0,0,48,9,1,0,0,0,49,56,5,20,0,0,50,56,5,21,0,0,51,56,5,22,0,
-	0,52,56,5,23,0,0,53,56,5,19,0,0,54,56,3,12,6,0,55,49,1,0,0,0,55,50,1,0,
+	0,47,48,7,0,0,0,48,9,1,0,0,0,49,56,5,19,0,0,50,56,5,20,0,0,51,56,5,21,0,
+	0,52,56,5,22,0,0,53,56,5,18,0,0,54,56,3,12,6,0,55,49,1,0,0,0,55,50,1,0,
 	0,0,55,51,1,0,0,0,55,52,1,0,0,0,55,53,1,0,0,0,55,54,1,0,0,0,56,11,1,0,0,
-	0,57,58,5,11,0,0,58,59,5,19,0,0,59,60,5,3,0,0,60,61,3,14,7,0,61,65,5,12,
+	0,57,58,5,11,0,0,58,59,5,18,0,0,59,60,5,3,0,0,60,61,3,14,7,0,61,65,5,12,
 	0,0,62,64,3,2,1,0,63,62,1,0,0,0,64,67,1,0,0,0,65,63,1,0,0,0,65,66,1,0,0,
 	0,66,68,1,0,0,0,67,65,1,0,0,0,68,69,5,13,0,0,69,13,1,0,0,0,70,75,3,16,8,
 	0,71,72,5,14,0,0,72,74,3,16,8,0,73,71,1,0,0,0,74,77,1,0,0,0,75,73,1,0,0,
 	0,75,76,1,0,0,0,76,79,1,0,0,0,77,75,1,0,0,0,78,70,1,0,0,0,78,79,1,0,0,0,
-	79,15,1,0,0,0,80,81,5,19,0,0,81,82,5,6,0,0,82,83,3,18,9,0,83,17,1,0,0,0,
+	79,15,1,0,0,0,80,81,5,18,0,0,81,82,5,6,0,0,82,83,3,18,9,0,83,17,1,0,0,0,
 	84,85,7,1,0,0,85,19,1,0,0,0,6,24,26,55,65,75,78];
 
 	private static __ATN: ATN;
@@ -573,6 +573,12 @@ export class ProgramContext extends ParserRuleContext {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
+	public printStatement_list(): PrintStatementContext[] {
+		return this.getTypedRuleContexts(PrintStatementContext) as PrintStatementContext[];
+	}
+	public printStatement(i: number): PrintStatementContext {
+		return this.getTypedRuleContext(PrintStatementContext, i) as PrintStatementContext;
+	}
 	public statement_list(): StatementContext[] {
 		return this.getTypedRuleContexts(StatementContext) as StatementContext[];
 	}
@@ -590,12 +596,6 @@ export class ProgramContext extends ParserRuleContext {
 	}
 	public functionDeclaration(i: number): FunctionDeclarationContext {
 		return this.getTypedRuleContext(FunctionDeclarationContext, i) as FunctionDeclarationContext;
-	}
-	public printStatement_list(): PrintStatementContext[] {
-		return this.getTypedRuleContexts(PrintStatementContext) as PrintStatementContext[];
-	}
-	public printStatement(i: number): PrintStatementContext {
-		return this.getTypedRuleContext(PrintStatementContext, i) as PrintStatementContext;
 	}
     public get ruleIndex(): number {
     	return JactParser.RULE_program;

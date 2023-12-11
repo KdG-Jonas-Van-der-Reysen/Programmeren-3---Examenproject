@@ -1,9 +1,10 @@
 grammar Jact;
 
-program: (printStatement | statement | variableDeclaration | functionDeclaration)*;
+program: statement*;
 
-statement: ID ';';
+statement: (ID ';') | printStatement | variableDeclaration | functionDeclaration | returnStatement | functionCall;
 printStatement: 'print' '(' expression ')' ';';
+returnStatement: 'return' expression ';';
 
 variableDeclaration:
 	variableMemoryTypeDeclaration ' ' ID ':' builtInType ' = ' expression ';';
@@ -11,6 +12,7 @@ variableDeclaration:
 variableMemoryTypeDeclaration: 'const' | 'let' | 'var';
 expression: INT | FLOAT | BOOL | STRING | ID | functionDeclaration;
 functionDeclaration: 'function' ID '(' parameterList ') {' statement* '}';
+functionCall: ID '(' parameterList ')';
 parameterList: (parameter (',' parameter)*)?;
 parameter: ID ':' builtInType;
 
@@ -22,4 +24,7 @@ BOOL: 'true' | 'false';
 STRING: '"' .*? '"';
 VOID: 'void';
 
-builtInType: 'int' | 'float' | 'bool' | 'string' | 'void';
+builtInType: 'number' | 'boolean' | 'string' | 'void';
+
+// Skip whitespace and newlines
+WS: [ \t\r\n]+ -> skip;

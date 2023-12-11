@@ -8,6 +8,9 @@ test('parseSourceCode should work', (): void => {
 const sourceCode = `const name:string = "jan";
 const birthYear:number = 1980;
 const isAdmin:boolean = true;
-
 print(name);
+
+function hello() {
+    print("hi");
+}
 `

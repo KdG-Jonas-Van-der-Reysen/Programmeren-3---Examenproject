@@ -1,4 +1,4 @@
-import { ExpressionContext, PrintStatementContext, VariableDeclarationContext, VariableMemoryTypeDeclarationContext } from './generated/JactParser'
+import { ExpressionContext, FunctionDeclarationContext, ParameterListContext, PrintStatementContext, StatementContext, VariableDeclarationContext, VariableMemoryTypeDeclarationContext } from './generated/JactParser'
 import JactVisitor from './generated/JactVisitor'
 
 export default class CustomJactVisitor extends JactVisitor<string> {
@@ -14,7 +14,12 @@ export default class CustomJactVisitor extends JactVisitor<string> {
     };
     visitMemberDeclaration?: (ctx: MemberDeclarationContext) => Result;*/
 
-    visitPrintStatementDeclaration = (ctx: PrintStatementContext) => {
+    visitStatement = (ctx: StatementContext) => {
+        return ctx.getText()
+    }
+
+    visitPrintStatement = (ctx: PrintStatementContext) => {
+        console.log('In print statement declaration!')
         return `console.log(${this.visitExpression(ctx.expression())});`
     }
 
@@ -32,6 +37,14 @@ export default class CustomJactVisitor extends JactVisitor<string> {
         return ctx.getText()
     }
 
+    visitFunctionDeclaration = (ctx: FunctionDeclarationContext) => {
+        return `function ${ctx.ID()}(${this.visitParameterList(ctx.parameterList())}) {${ctx.statement_list().map((statement) => this.visitStatement(statement)).join('')}}`
+    }
+
+
+    visitParameterList = (ctx: ParameterListContext) => {
+        return ctx.getText()
+    }
 
 
     /*visitMethodDeclaration?: (ctx: MethodDeclarationContext) => Result;
