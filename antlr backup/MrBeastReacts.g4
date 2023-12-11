@@ -1,4 +1,4 @@
-grammar mrbeastreacts; // Updated grammar name to match the file name
+grammar MrBeastReacts; // Updated grammar name to match the file name
 
 program: statementList;
 

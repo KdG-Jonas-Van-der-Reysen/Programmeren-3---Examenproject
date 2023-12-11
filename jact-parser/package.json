@@ -21,7 +21,7 @@
     "scripts": {
         "build": "tsc",
         "test": "jest",
-        "antlr": "cd src/resources && java -cp ../resources/antlr-4.13.1-complete.jar org.antlr.v4.Tool -o ../ts/generated -visitor -Dlanguage=TypeScript mrbeastreacts.g4"
+        "antlr": "cd src/resources && java -cp ../resources/antlr-4.13.1-complete.jar org.antlr.v4.Tool -o ../ts/generated -visitor -Dlanguage=TypeScript Jact.g4"
     },
     "dependencies": {
         "antlr4": "^4.13.1-patch-1"
