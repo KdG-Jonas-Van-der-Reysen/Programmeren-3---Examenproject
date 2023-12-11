@@ -1,4 +1,4 @@
-import { AttributeDeclarationContext, ClassDeclarationContext, MemberDeclarationContext } from './generated/JactParser'
+import { ExpressionContext, PrintStatementContext, VariableDeclarationContext, VariableMemoryTypeDeclarationContext } from './generated/JactParser'
 import JactVisitor from './generated/JactVisitor'
 
 export default class CustomJactVisitor extends JactVisitor<string> {
@@ -14,21 +14,26 @@ export default class CustomJactVisitor extends JactVisitor<string> {
     };
     visitMemberDeclaration?: (ctx: MemberDeclarationContext) => Result;*/
 
-
-    visitClassDeclaration = (ctx: ClassDeclarationContext) => {
-        return `public class ${ctx.ID()} { ${
-            ctx.memberDeclaration_list().map((member) => {this.visitMemberDeclaration(member)})
-        } };`
-    }
-    visitAttributeDeclaration = (ctx: AttributeDeclarationContext) => {
-        this._knownAttributes.push(ctx.children[3].getText())
-
-        return ctx.children[3].getText()
+    visitPrintStatementDeclaration = (ctx: PrintStatementContext) => {
+        return `console.log(${this.visitExpression(ctx.expression())});`
     }
 
-    visitMemberDeclaration = (ctx: MemberDeclarationContext) => {
-        return 'oi'
+    visitVariableDeclaration = (ctx: VariableDeclarationContext) => {
+        return `${
+            this.visitVariableMemoryTypeDeclaration(ctx.variableMemoryTypeDeclaration())
+        } ${ctx.ID()} = ${this.visitExpression(ctx.expression())};`
     }
+
+    visitVariableMemoryTypeDeclaration = (ctx: VariableMemoryTypeDeclarationContext) => {
+        return ctx.getText()
+    }
+
+    visitExpression = (ctx: ExpressionContext) => {
+        return ctx.getText()
+    }
+
+
+
     /*visitMethodDeclaration?: (ctx: MethodDeclarationContext) => Result;
     visitType?: (ctx: TypeContext) => Result;
     visitBuiltInType?: (ctx: BuiltInTypeContext) => Result;

@@ -32,24 +32,41 @@ export default class JactParser extends Parser {
 	public static readonly T__10 = 11;
 	public static readonly T__11 = 12;
 	public static readonly T__12 = 13;
-	public static readonly ID = 14;
-	public static readonly WS = 15;
+	public static readonly T__13 = 14;
+	public static readonly T__14 = 15;
+	public static readonly T__15 = 16;
+	public static readonly T__16 = 17;
+	public static readonly T__17 = 18;
+	public static readonly ID = 19;
+	public static readonly INT = 20;
+	public static readonly FLOAT = 21;
+	public static readonly BOOL = 22;
+	public static readonly STRING = 23;
+	public static readonly VOID = 24;
 	public static readonly EOF = Token.EOF;
-	public static readonly RULE_classDeclaration = 0;
-	public static readonly RULE_memberDeclaration = 1;
-	public static readonly RULE_attributeDeclaration = 2;
-	public static readonly RULE_methodDeclaration = 3;
-	public static readonly RULE_type = 4;
-	public static readonly RULE_builtInType = 5;
-	public static readonly RULE_parameterList = 6;
-	public static readonly RULE_statement = 7;
-	public static readonly literalNames: (string | null)[] = [ null, "'public'", 
-                                                            "'class'", "'{'", 
-                                                            "'}'", "'private'", 
-                                                            "'final'", "';'", 
-                                                            "'('", "')'", 
-                                                            "'int'", "'double'", 
-                                                            "'void'", "','" ];
+	public static readonly RULE_program = 0;
+	public static readonly RULE_statement = 1;
+	public static readonly RULE_printStatement = 2;
+	public static readonly RULE_variableDeclaration = 3;
+	public static readonly RULE_variableMemoryTypeDeclaration = 4;
+	public static readonly RULE_expression = 5;
+	public static readonly RULE_functionDeclaration = 6;
+	public static readonly RULE_parameterList = 7;
+	public static readonly RULE_parameter = 8;
+	public static readonly RULE_builtInType = 9;
+	public static readonly literalNames: (string | null)[] = [ null, "';'", 
+                                                            "'print'", "'('", 
+                                                            "')'", "' '", 
+                                                            "':'", "' = '", 
+                                                            "'const'", "'let'", 
+                                                            "'var'", "'function'", 
+                                                            "') {'", "'}'", 
+                                                            "','", "'int'", 
+                                                            "'float'", "'bool'", 
+                                                            "'string'", 
+                                                            null, null, 
+                                                            null, null, 
+                                                            null, "'void'" ];
 	public static readonly symbolicNames: (string | null)[] = [ null, null, 
                                                              null, null, 
                                                              null, null, 
@@ -57,11 +74,16 @@ export default class JactParser extends Parser {
                                                              null, null, 
                                                              null, null, 
                                                              null, null, 
-                                                             "ID", "WS" ];
+                                                             null, null, 
+                                                             null, null, 
+                                                             null, "ID", 
+                                                             "INT", "FLOAT", 
+                                                             "BOOL", "STRING", 
+                                                             "VOID" ];
 	// tslint:disable:no-trailing-whitespace
 	public static readonly ruleNames: string[] = [
-		"classDeclaration", "memberDeclaration", "attributeDeclaration", "methodDeclaration", 
-		"type", "builtInType", "parameterList", "statement",
+		"program", "statement", "printStatement", "variableDeclaration", "variableMemoryTypeDeclaration", 
+		"expression", "functionDeclaration", "parameterList", "parameter", "builtInType",
 	];
 	public get grammarFileName(): string { return "Jact.g4"; }
 	public get literalNames(): (string | null)[] { return JactParser.literalNames; }
@@ -78,37 +100,55 @@ export default class JactParser extends Parser {
 		this._interp = new ParserATNSimulator(this, JactParser._ATN, JactParser.DecisionsToDFA, new PredictionContextCache());
 	}
 	// @RuleVersion(0)
-	public classDeclaration(): ClassDeclarationContext {
-		let localctx: ClassDeclarationContext = new ClassDeclarationContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 0, JactParser.RULE_classDeclaration);
+	public program(): ProgramContext {
+		let localctx: ProgramContext = new ProgramContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 0, JactParser.RULE_program);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 16;
-			this.match(JactParser.T__0);
-			this.state = 17;
-			this.match(JactParser.T__1);
-			this.state = 18;
-			this.match(JactParser.ID);
-			this.state = 19;
-			this.match(JactParser.T__2);
-			this.state = 23;
+			this.state = 26;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la===1 || _la===5) {
+			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 528132) !== 0)) {
 				{
-				{
-				this.state = 20;
-				this.memberDeclaration();
+				this.state = 24;
+				this._errHandler.sync(this);
+				switch (this._input.LA(1)) {
+				case 19:
+					{
+					this.state = 20;
+					this.statement();
+					}
+					break;
+				case 8:
+				case 9:
+				case 10:
+					{
+					this.state = 21;
+					this.variableDeclaration();
+					}
+					break;
+				case 11:
+					{
+					this.state = 22;
+					this.functionDeclaration();
+					}
+					break;
+				case 2:
+					{
+					this.state = 23;
+					this.printStatement();
+					}
+					break;
+				default:
+					throw new NoViableAltException(this);
 				}
 				}
-				this.state = 25;
+				this.state = 28;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
-			this.state = 26;
-			this.match(JactParser.T__3);
 			}
 		}
 		catch (re) {
@@ -126,29 +166,16 @@ export default class JactParser extends Parser {
 		return localctx;
 	}
 	// @RuleVersion(0)
-	public memberDeclaration(): MemberDeclarationContext {
-		let localctx: MemberDeclarationContext = new MemberDeclarationContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 2, JactParser.RULE_memberDeclaration);
+	public statement(): StatementContext {
+		let localctx: StatementContext = new StatementContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 2, JactParser.RULE_statement);
 		try {
+			this.enterOuterAlt(localctx, 1);
+			{
+			this.state = 29;
+			this.match(JactParser.ID);
 			this.state = 30;
-			this._errHandler.sync(this);
-			switch (this._input.LA(1)) {
-			case 5:
-				this.enterOuterAlt(localctx, 1);
-				{
-				this.state = 28;
-				this.attributeDeclaration();
-				}
-				break;
-			case 1:
-				this.enterOuterAlt(localctx, 2);
-				{
-				this.state = 29;
-				this.methodDeclaration();
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
+			this.match(JactParser.T__0);
 			}
 		}
 		catch (re) {
@@ -166,22 +193,22 @@ export default class JactParser extends Parser {
 		return localctx;
 	}
 	// @RuleVersion(0)
-	public attributeDeclaration(): AttributeDeclarationContext {
-		let localctx: AttributeDeclarationContext = new AttributeDeclarationContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 4, JactParser.RULE_attributeDeclaration);
+	public printStatement(): PrintStatementContext {
+		let localctx: PrintStatementContext = new PrintStatementContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 4, JactParser.RULE_printStatement);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
 			this.state = 32;
-			this.match(JactParser.T__4);
+			this.match(JactParser.T__1);
 			this.state = 33;
-			this.match(JactParser.T__5);
+			this.match(JactParser.T__2);
 			this.state = 34;
-			this.type_();
+			this.expression();
 			this.state = 35;
-			this.match(JactParser.ID);
+			this.match(JactParser.T__3);
 			this.state = 36;
-			this.match(JactParser.T__6);
+			this.match(JactParser.T__0);
 			}
 		}
 		catch (re) {
@@ -199,51 +226,28 @@ export default class JactParser extends Parser {
 		return localctx;
 	}
 	// @RuleVersion(0)
-	public methodDeclaration(): MethodDeclarationContext {
-		let localctx: MethodDeclarationContext = new MethodDeclarationContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 6, JactParser.RULE_methodDeclaration);
-		let _la: number;
+	public variableDeclaration(): VariableDeclarationContext {
+		let localctx: VariableDeclarationContext = new VariableDeclarationContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 6, JactParser.RULE_variableDeclaration);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
 			this.state = 38;
-			this.match(JactParser.T__0);
+			this.variableMemoryTypeDeclaration();
 			this.state = 39;
-			this.type_();
+			this.match(JactParser.T__4);
 			this.state = 40;
 			this.match(JactParser.ID);
 			this.state = 41;
-			this.match(JactParser.T__7);
+			this.match(JactParser.T__5);
+			this.state = 42;
+			this.builtInType();
 			this.state = 43;
-			this._errHandler.sync(this);
-			_la = this._input.LA(1);
-			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 23552) !== 0)) {
-				{
-				this.state = 42;
-				this.parameterList();
-				}
-			}
-
+			this.match(JactParser.T__6);
+			this.state = 44;
+			this.expression();
 			this.state = 45;
-			this.match(JactParser.T__8);
-			this.state = 46;
-			this.match(JactParser.T__2);
-			this.state = 50;
-			this._errHandler.sync(this);
-			_la = this._input.LA(1);
-			while (_la===14) {
-				{
-				{
-				this.state = 47;
-				this.statement();
-				}
-				}
-				this.state = 52;
-				this._errHandler.sync(this);
-				_la = this._input.LA(1);
-			}
-			this.state = 53;
-			this.match(JactParser.T__3);
+			this.match(JactParser.T__0);
 			}
 		}
 		catch (re) {
@@ -261,58 +265,16 @@ export default class JactParser extends Parser {
 		return localctx;
 	}
 	// @RuleVersion(0)
-	public type_(): TypeContext {
-		let localctx: TypeContext = new TypeContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 8, JactParser.RULE_type);
-		try {
-			this.state = 57;
-			this._errHandler.sync(this);
-			switch (this._input.LA(1)) {
-			case 10:
-			case 11:
-			case 12:
-				this.enterOuterAlt(localctx, 1);
-				{
-				this.state = 55;
-				this.builtInType();
-				}
-				break;
-			case 14:
-				this.enterOuterAlt(localctx, 2);
-				{
-				this.state = 56;
-				this.match(JactParser.ID);
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
-		}
-		catch (re) {
-			if (re instanceof RecognitionException) {
-				localctx.exception = re;
-				this._errHandler.reportError(this, re);
-				this._errHandler.recover(this, re);
-			} else {
-				throw re;
-			}
-		}
-		finally {
-			this.exitRule();
-		}
-		return localctx;
-	}
-	// @RuleVersion(0)
-	public builtInType(): BuiltInTypeContext {
-		let localctx: BuiltInTypeContext = new BuiltInTypeContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 10, JactParser.RULE_builtInType);
+	public variableMemoryTypeDeclaration(): VariableMemoryTypeDeclarationContext {
+		let localctx: VariableMemoryTypeDeclarationContext = new VariableMemoryTypeDeclarationContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 8, JactParser.RULE_variableMemoryTypeDeclaration);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 59;
+			this.state = 47;
 			_la = this._input.LA(1);
-			if(!((((_la) & ~0x1F) === 0 && ((1 << _la) & 7168) !== 0))) {
+			if(!((((_la) & ~0x1F) === 0 && ((1 << _la) & 1792) !== 0))) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -336,35 +298,57 @@ export default class JactParser extends Parser {
 		return localctx;
 	}
 	// @RuleVersion(0)
-	public parameterList(): ParameterListContext {
-		let localctx: ParameterListContext = new ParameterListContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 12, JactParser.RULE_parameterList);
-		let _la: number;
+	public expression(): ExpressionContext {
+		let localctx: ExpressionContext = new ExpressionContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 10, JactParser.RULE_expression);
 		try {
-			this.enterOuterAlt(localctx, 1);
-			{
-			this.state = 61;
-			this.type_();
-			this.state = 62;
-			this.match(JactParser.ID);
-			this.state = 69;
+			this.state = 55;
 			this._errHandler.sync(this);
-			_la = this._input.LA(1);
-			while (_la===13) {
+			switch (this._input.LA(1)) {
+			case 20:
+				this.enterOuterAlt(localctx, 1);
 				{
+				this.state = 49;
+				this.match(JactParser.INT);
+				}
+				break;
+			case 21:
+				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 63;
-				this.match(JactParser.T__12);
-				this.state = 64;
-				this.type_();
-				this.state = 65;
+				this.state = 50;
+				this.match(JactParser.FLOAT);
+				}
+				break;
+			case 22:
+				this.enterOuterAlt(localctx, 3);
+				{
+				this.state = 51;
+				this.match(JactParser.BOOL);
+				}
+				break;
+			case 23:
+				this.enterOuterAlt(localctx, 4);
+				{
+				this.state = 52;
+				this.match(JactParser.STRING);
+				}
+				break;
+			case 19:
+				this.enterOuterAlt(localctx, 5);
+				{
+				this.state = 53;
 				this.match(JactParser.ID);
 				}
+				break;
+			case 11:
+				this.enterOuterAlt(localctx, 6);
+				{
+				this.state = 54;
+				this.functionDeclaration();
 				}
-				this.state = 71;
-				this._errHandler.sync(this);
-				_la = this._input.LA(1);
-			}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
@@ -382,16 +366,151 @@ export default class JactParser extends Parser {
 		return localctx;
 	}
 	// @RuleVersion(0)
-	public statement(): StatementContext {
-		let localctx: StatementContext = new StatementContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 14, JactParser.RULE_statement);
+	public functionDeclaration(): FunctionDeclarationContext {
+		let localctx: FunctionDeclarationContext = new FunctionDeclarationContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 12, JactParser.RULE_functionDeclaration);
+		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 72;
+			this.state = 57;
+			this.match(JactParser.T__10);
+			this.state = 58;
 			this.match(JactParser.ID);
-			this.state = 73;
-			this.match(JactParser.T__6);
+			this.state = 59;
+			this.match(JactParser.T__2);
+			this.state = 60;
+			this.parameterList();
+			this.state = 61;
+			this.match(JactParser.T__11);
+			this.state = 65;
+			this._errHandler.sync(this);
+			_la = this._input.LA(1);
+			while (_la===19) {
+				{
+				{
+				this.state = 62;
+				this.statement();
+				}
+				}
+				this.state = 67;
+				this._errHandler.sync(this);
+				_la = this._input.LA(1);
+			}
+			this.state = 68;
+			this.match(JactParser.T__12);
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return localctx;
+	}
+	// @RuleVersion(0)
+	public parameterList(): ParameterListContext {
+		let localctx: ParameterListContext = new ParameterListContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 14, JactParser.RULE_parameterList);
+		let _la: number;
+		try {
+			this.enterOuterAlt(localctx, 1);
+			{
+			this.state = 78;
+			this._errHandler.sync(this);
+			_la = this._input.LA(1);
+			if (_la===19) {
+				{
+				this.state = 70;
+				this.parameter();
+				this.state = 75;
+				this._errHandler.sync(this);
+				_la = this._input.LA(1);
+				while (_la===14) {
+					{
+					{
+					this.state = 71;
+					this.match(JactParser.T__13);
+					this.state = 72;
+					this.parameter();
+					}
+					}
+					this.state = 77;
+					this._errHandler.sync(this);
+					_la = this._input.LA(1);
+				}
+				}
+			}
+
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return localctx;
+	}
+	// @RuleVersion(0)
+	public parameter(): ParameterContext {
+		let localctx: ParameterContext = new ParameterContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 16, JactParser.RULE_parameter);
+		try {
+			this.enterOuterAlt(localctx, 1);
+			{
+			this.state = 80;
+			this.match(JactParser.ID);
+			this.state = 81;
+			this.match(JactParser.T__5);
+			this.state = 82;
+			this.builtInType();
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return localctx;
+	}
+	// @RuleVersion(0)
+	public builtInType(): BuiltInTypeContext {
+		let localctx: BuiltInTypeContext = new BuiltInTypeContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 18, JactParser.RULE_builtInType);
+		let _la: number;
+		try {
+			this.enterOuterAlt(localctx, 1);
+			{
+			this.state = 84;
+			_la = this._input.LA(1);
+			if(!((((_la) & ~0x1F) === 0 && ((1 << _la) & 17268736) !== 0))) {
+			this._errHandler.recoverInline(this);
+			}
+			else {
+				this._errHandler.reportMatch(this);
+			    this.consume();
+			}
 			}
 		}
 		catch (re) {
@@ -409,27 +528,31 @@ export default class JactParser extends Parser {
 		return localctx;
 	}
 
-	public static readonly _serializedATN: number[] = [4,1,15,76,2,0,7,0,2,
-	1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,6,2,7,7,7,1,0,1,0,1,0,1,0,1,
-	0,5,0,22,8,0,10,0,12,0,25,9,0,1,0,1,0,1,1,1,1,3,1,31,8,1,1,2,1,2,1,2,1,
-	2,1,2,1,2,1,3,1,3,1,3,1,3,1,3,3,3,44,8,3,1,3,1,3,1,3,5,3,49,8,3,10,3,12,
-	3,52,9,3,1,3,1,3,1,4,1,4,3,4,58,8,4,1,5,1,5,1,6,1,6,1,6,1,6,1,6,1,6,5,6,
-	68,8,6,10,6,12,6,71,9,6,1,7,1,7,1,7,1,7,0,0,8,0,2,4,6,8,10,12,14,0,1,1,
-	0,10,12,73,0,16,1,0,0,0,2,30,1,0,0,0,4,32,1,0,0,0,6,38,1,0,0,0,8,57,1,0,
-	0,0,10,59,1,0,0,0,12,61,1,0,0,0,14,72,1,0,0,0,16,17,5,1,0,0,17,18,5,2,0,
-	0,18,19,5,14,0,0,19,23,5,3,0,0,20,22,3,2,1,0,21,20,1,0,0,0,22,25,1,0,0,
-	0,23,21,1,0,0,0,23,24,1,0,0,0,24,26,1,0,0,0,25,23,1,0,0,0,26,27,5,4,0,0,
-	27,1,1,0,0,0,28,31,3,4,2,0,29,31,3,6,3,0,30,28,1,0,0,0,30,29,1,0,0,0,31,
-	3,1,0,0,0,32,33,5,5,0,0,33,34,5,6,0,0,34,35,3,8,4,0,35,36,5,14,0,0,36,37,
-	5,7,0,0,37,5,1,0,0,0,38,39,5,1,0,0,39,40,3,8,4,0,40,41,5,14,0,0,41,43,5,
-	8,0,0,42,44,3,12,6,0,43,42,1,0,0,0,43,44,1,0,0,0,44,45,1,0,0,0,45,46,5,
-	9,0,0,46,50,5,3,0,0,47,49,3,14,7,0,48,47,1,0,0,0,49,52,1,0,0,0,50,48,1,
-	0,0,0,50,51,1,0,0,0,51,53,1,0,0,0,52,50,1,0,0,0,53,54,5,4,0,0,54,7,1,0,
-	0,0,55,58,3,10,5,0,56,58,5,14,0,0,57,55,1,0,0,0,57,56,1,0,0,0,58,9,1,0,
-	0,0,59,60,7,0,0,0,60,11,1,0,0,0,61,62,3,8,4,0,62,69,5,14,0,0,63,64,5,13,
-	0,0,64,65,3,8,4,0,65,66,5,14,0,0,66,68,1,0,0,0,67,63,1,0,0,0,68,71,1,0,
-	0,0,69,67,1,0,0,0,69,70,1,0,0,0,70,13,1,0,0,0,71,69,1,0,0,0,72,73,5,14,
-	0,0,73,74,5,7,0,0,74,15,1,0,0,0,6,23,30,43,50,57,69];
+	public static readonly _serializedATN: number[] = [4,1,24,87,2,0,7,0,2,
+	1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,6,2,7,7,7,2,8,7,8,2,9,7,9,1,
+	0,1,0,1,0,1,0,5,0,25,8,0,10,0,12,0,28,9,0,1,1,1,1,1,1,1,2,1,2,1,2,1,2,1,
+	2,1,2,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,4,1,4,1,5,1,5,1,5,1,5,1,5,1,
+	5,3,5,56,8,5,1,6,1,6,1,6,1,6,1,6,1,6,5,6,64,8,6,10,6,12,6,67,9,6,1,6,1,
+	6,1,7,1,7,1,7,5,7,74,8,7,10,7,12,7,77,9,7,3,7,79,8,7,1,8,1,8,1,8,1,8,1,
+	9,1,9,1,9,0,0,10,0,2,4,6,8,10,12,14,16,18,0,2,1,0,8,10,2,0,15,18,24,24,
+	88,0,26,1,0,0,0,2,29,1,0,0,0,4,32,1,0,0,0,6,38,1,0,0,0,8,47,1,0,0,0,10,
+	55,1,0,0,0,12,57,1,0,0,0,14,78,1,0,0,0,16,80,1,0,0,0,18,84,1,0,0,0,20,25,
+	3,2,1,0,21,25,3,6,3,0,22,25,3,12,6,0,23,25,3,4,2,0,24,20,1,0,0,0,24,21,
+	1,0,0,0,24,22,1,0,0,0,24,23,1,0,0,0,25,28,1,0,0,0,26,24,1,0,0,0,26,27,1,
+	0,0,0,27,1,1,0,0,0,28,26,1,0,0,0,29,30,5,19,0,0,30,31,5,1,0,0,31,3,1,0,
+	0,0,32,33,5,2,0,0,33,34,5,3,0,0,34,35,3,10,5,0,35,36,5,4,0,0,36,37,5,1,
+	0,0,37,5,1,0,0,0,38,39,3,8,4,0,39,40,5,5,0,0,40,41,5,19,0,0,41,42,5,6,0,
+	0,42,43,3,18,9,0,43,44,5,7,0,0,44,45,3,10,5,0,45,46,5,1,0,0,46,7,1,0,0,
+	0,47,48,7,0,0,0,48,9,1,0,0,0,49,56,5,20,0,0,50,56,5,21,0,0,51,56,5,22,0,
+	0,52,56,5,23,0,0,53,56,5,19,0,0,54,56,3,12,6,0,55,49,1,0,0,0,55,50,1,0,
+	0,0,55,51,1,0,0,0,55,52,1,0,0,0,55,53,1,0,0,0,55,54,1,0,0,0,56,11,1,0,0,
+	0,57,58,5,11,0,0,58,59,5,19,0,0,59,60,5,3,0,0,60,61,3,14,7,0,61,65,5,12,
+	0,0,62,64,3,2,1,0,63,62,1,0,0,0,64,67,1,0,0,0,65,63,1,0,0,0,65,66,1,0,0,
+	0,66,68,1,0,0,0,67,65,1,0,0,0,68,69,5,13,0,0,69,13,1,0,0,0,70,75,3,16,8,
+	0,71,72,5,14,0,0,72,74,3,16,8,0,73,71,1,0,0,0,74,77,1,0,0,0,75,73,1,0,0,
+	0,75,76,1,0,0,0,76,79,1,0,0,0,77,75,1,0,0,0,78,70,1,0,0,0,78,79,1,0,0,0,
+	79,15,1,0,0,0,80,81,5,19,0,0,81,82,5,6,0,0,82,83,3,18,9,0,83,17,1,0,0,0,
+	84,85,7,1,0,0,85,19,1,0,0,0,6,24,26,55,65,75,78];
 
 	private static __ATN: ATN;
 	public static get _ATN(): ATN {
@@ -445,127 +568,10 @@ export default class JactParser extends Parser {
 
 }
 
-export class ClassDeclarationContext extends ParserRuleContext {
+export class ProgramContext extends ParserRuleContext {
 	constructor(parser?: JactParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
-	}
-	public ID(): TerminalNode {
-		return this.getToken(JactParser.ID, 0);
-	}
-	public memberDeclaration_list(): MemberDeclarationContext[] {
-		return this.getTypedRuleContexts(MemberDeclarationContext) as MemberDeclarationContext[];
-	}
-	public memberDeclaration(i: number): MemberDeclarationContext {
-		return this.getTypedRuleContext(MemberDeclarationContext, i) as MemberDeclarationContext;
-	}
-    public get ruleIndex(): number {
-    	return JactParser.RULE_classDeclaration;
-	}
-	public enterRule(listener: JactListener): void {
-	    if(listener.enterClassDeclaration) {
-	 		listener.enterClassDeclaration(this);
-		}
-	}
-	public exitRule(listener: JactListener): void {
-	    if(listener.exitClassDeclaration) {
-	 		listener.exitClassDeclaration(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: JactVisitor<Result>): Result {
-		if (visitor.visitClassDeclaration) {
-			return visitor.visitClassDeclaration(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-
-
-export class MemberDeclarationContext extends ParserRuleContext {
-	constructor(parser?: JactParser, parent?: ParserRuleContext, invokingState?: number) {
-		super(parent, invokingState);
-    	this.parser = parser;
-	}
-	public attributeDeclaration(): AttributeDeclarationContext {
-		return this.getTypedRuleContext(AttributeDeclarationContext, 0) as AttributeDeclarationContext;
-	}
-	public methodDeclaration(): MethodDeclarationContext {
-		return this.getTypedRuleContext(MethodDeclarationContext, 0) as MethodDeclarationContext;
-	}
-    public get ruleIndex(): number {
-    	return JactParser.RULE_memberDeclaration;
-	}
-	public enterRule(listener: JactListener): void {
-	    if(listener.enterMemberDeclaration) {
-	 		listener.enterMemberDeclaration(this);
-		}
-	}
-	public exitRule(listener: JactListener): void {
-	    if(listener.exitMemberDeclaration) {
-	 		listener.exitMemberDeclaration(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: JactVisitor<Result>): Result {
-		if (visitor.visitMemberDeclaration) {
-			return visitor.visitMemberDeclaration(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-
-
-export class AttributeDeclarationContext extends ParserRuleContext {
-	constructor(parser?: JactParser, parent?: ParserRuleContext, invokingState?: number) {
-		super(parent, invokingState);
-    	this.parser = parser;
-	}
-	public type_(): TypeContext {
-		return this.getTypedRuleContext(TypeContext, 0) as TypeContext;
-	}
-	public ID(): TerminalNode {
-		return this.getToken(JactParser.ID, 0);
-	}
-    public get ruleIndex(): number {
-    	return JactParser.RULE_attributeDeclaration;
-	}
-	public enterRule(listener: JactListener): void {
-	    if(listener.enterAttributeDeclaration) {
-	 		listener.enterAttributeDeclaration(this);
-		}
-	}
-	public exitRule(listener: JactListener): void {
-	    if(listener.exitAttributeDeclaration) {
-	 		listener.exitAttributeDeclaration(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: JactVisitor<Result>): Result {
-		if (visitor.visitAttributeDeclaration) {
-			return visitor.visitAttributeDeclaration(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-
-
-export class MethodDeclarationContext extends ParserRuleContext {
-	constructor(parser?: JactParser, parent?: ParserRuleContext, invokingState?: number) {
-		super(parent, invokingState);
-    	this.parser = parser;
-	}
-	public type_(): TypeContext {
-		return this.getTypedRuleContext(TypeContext, 0) as TypeContext;
-	}
-	public ID(): TerminalNode {
-		return this.getToken(JactParser.ID, 0);
-	}
-	public parameterList(): ParameterListContext {
-		return this.getTypedRuleContext(ParameterListContext, 0) as ParameterListContext;
 	}
 	public statement_list(): StatementContext[] {
 		return this.getTypedRuleContexts(StatementContext) as StatementContext[];
@@ -573,128 +579,41 @@ export class MethodDeclarationContext extends ParserRuleContext {
 	public statement(i: number): StatementContext {
 		return this.getTypedRuleContext(StatementContext, i) as StatementContext;
 	}
+	public variableDeclaration_list(): VariableDeclarationContext[] {
+		return this.getTypedRuleContexts(VariableDeclarationContext) as VariableDeclarationContext[];
+	}
+	public variableDeclaration(i: number): VariableDeclarationContext {
+		return this.getTypedRuleContext(VariableDeclarationContext, i) as VariableDeclarationContext;
+	}
+	public functionDeclaration_list(): FunctionDeclarationContext[] {
+		return this.getTypedRuleContexts(FunctionDeclarationContext) as FunctionDeclarationContext[];
+	}
+	public functionDeclaration(i: number): FunctionDeclarationContext {
+		return this.getTypedRuleContext(FunctionDeclarationContext, i) as FunctionDeclarationContext;
+	}
+	public printStatement_list(): PrintStatementContext[] {
+		return this.getTypedRuleContexts(PrintStatementContext) as PrintStatementContext[];
+	}
+	public printStatement(i: number): PrintStatementContext {
+		return this.getTypedRuleContext(PrintStatementContext, i) as PrintStatementContext;
+	}
     public get ruleIndex(): number {
-    	return JactParser.RULE_methodDeclaration;
+    	return JactParser.RULE_program;
 	}
 	public enterRule(listener: JactListener): void {
-	    if(listener.enterMethodDeclaration) {
-	 		listener.enterMethodDeclaration(this);
+	    if(listener.enterProgram) {
+	 		listener.enterProgram(this);
 		}
 	}
 	public exitRule(listener: JactListener): void {
-	    if(listener.exitMethodDeclaration) {
-	 		listener.exitMethodDeclaration(this);
+	    if(listener.exitProgram) {
+	 		listener.exitProgram(this);
 		}
 	}
 	// @Override
 	public accept<Result>(visitor: JactVisitor<Result>): Result {
-		if (visitor.visitMethodDeclaration) {
-			return visitor.visitMethodDeclaration(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-
-
-export class TypeContext extends ParserRuleContext {
-	constructor(parser?: JactParser, parent?: ParserRuleContext, invokingState?: number) {
-		super(parent, invokingState);
-    	this.parser = parser;
-	}
-	public builtInType(): BuiltInTypeContext {
-		return this.getTypedRuleContext(BuiltInTypeContext, 0) as BuiltInTypeContext;
-	}
-	public ID(): TerminalNode {
-		return this.getToken(JactParser.ID, 0);
-	}
-    public get ruleIndex(): number {
-    	return JactParser.RULE_type;
-	}
-	public enterRule(listener: JactListener): void {
-	    if(listener.enterType) {
-	 		listener.enterType(this);
-		}
-	}
-	public exitRule(listener: JactListener): void {
-	    if(listener.exitType) {
-	 		listener.exitType(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: JactVisitor<Result>): Result {
-		if (visitor.visitType) {
-			return visitor.visitType(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-
-
-export class BuiltInTypeContext extends ParserRuleContext {
-	constructor(parser?: JactParser, parent?: ParserRuleContext, invokingState?: number) {
-		super(parent, invokingState);
-    	this.parser = parser;
-	}
-    public get ruleIndex(): number {
-    	return JactParser.RULE_builtInType;
-	}
-	public enterRule(listener: JactListener): void {
-	    if(listener.enterBuiltInType) {
-	 		listener.enterBuiltInType(this);
-		}
-	}
-	public exitRule(listener: JactListener): void {
-	    if(listener.exitBuiltInType) {
-	 		listener.exitBuiltInType(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: JactVisitor<Result>): Result {
-		if (visitor.visitBuiltInType) {
-			return visitor.visitBuiltInType(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-
-
-export class ParameterListContext extends ParserRuleContext {
-	constructor(parser?: JactParser, parent?: ParserRuleContext, invokingState?: number) {
-		super(parent, invokingState);
-    	this.parser = parser;
-	}
-	public type__list(): TypeContext[] {
-		return this.getTypedRuleContexts(TypeContext) as TypeContext[];
-	}
-	public type_(i: number): TypeContext {
-		return this.getTypedRuleContext(TypeContext, i) as TypeContext;
-	}
-	public ID_list(): TerminalNode[] {
-	    	return this.getTokens(JactParser.ID);
-	}
-	public ID(i: number): TerminalNode {
-		return this.getToken(JactParser.ID, i);
-	}
-    public get ruleIndex(): number {
-    	return JactParser.RULE_parameterList;
-	}
-	public enterRule(listener: JactListener): void {
-	    if(listener.enterParameterList) {
-	 		listener.enterParameterList(this);
-		}
-	}
-	public exitRule(listener: JactListener): void {
-	    if(listener.exitParameterList) {
-	 		listener.exitParameterList(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: JactVisitor<Result>): Result {
-		if (visitor.visitParameterList) {
-			return visitor.visitParameterList(this);
+		if (visitor.visitProgram) {
+			return visitor.visitProgram(this);
 		} else {
 			return visitor.visitChildren(this);
 		}
@@ -727,6 +646,298 @@ export class StatementContext extends ParserRuleContext {
 	public accept<Result>(visitor: JactVisitor<Result>): Result {
 		if (visitor.visitStatement) {
 			return visitor.visitStatement(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
+export class PrintStatementContext extends ParserRuleContext {
+	constructor(parser?: JactParser, parent?: ParserRuleContext, invokingState?: number) {
+		super(parent, invokingState);
+    	this.parser = parser;
+	}
+	public expression(): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
+	}
+    public get ruleIndex(): number {
+    	return JactParser.RULE_printStatement;
+	}
+	public enterRule(listener: JactListener): void {
+	    if(listener.enterPrintStatement) {
+	 		listener.enterPrintStatement(this);
+		}
+	}
+	public exitRule(listener: JactListener): void {
+	    if(listener.exitPrintStatement) {
+	 		listener.exitPrintStatement(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: JactVisitor<Result>): Result {
+		if (visitor.visitPrintStatement) {
+			return visitor.visitPrintStatement(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
+export class VariableDeclarationContext extends ParserRuleContext {
+	constructor(parser?: JactParser, parent?: ParserRuleContext, invokingState?: number) {
+		super(parent, invokingState);
+    	this.parser = parser;
+	}
+	public variableMemoryTypeDeclaration(): VariableMemoryTypeDeclarationContext {
+		return this.getTypedRuleContext(VariableMemoryTypeDeclarationContext, 0) as VariableMemoryTypeDeclarationContext;
+	}
+	public ID(): TerminalNode {
+		return this.getToken(JactParser.ID, 0);
+	}
+	public builtInType(): BuiltInTypeContext {
+		return this.getTypedRuleContext(BuiltInTypeContext, 0) as BuiltInTypeContext;
+	}
+	public expression(): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
+	}
+    public get ruleIndex(): number {
+    	return JactParser.RULE_variableDeclaration;
+	}
+	public enterRule(listener: JactListener): void {
+	    if(listener.enterVariableDeclaration) {
+	 		listener.enterVariableDeclaration(this);
+		}
+	}
+	public exitRule(listener: JactListener): void {
+	    if(listener.exitVariableDeclaration) {
+	 		listener.exitVariableDeclaration(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: JactVisitor<Result>): Result {
+		if (visitor.visitVariableDeclaration) {
+			return visitor.visitVariableDeclaration(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
+export class VariableMemoryTypeDeclarationContext extends ParserRuleContext {
+	constructor(parser?: JactParser, parent?: ParserRuleContext, invokingState?: number) {
+		super(parent, invokingState);
+    	this.parser = parser;
+	}
+    public get ruleIndex(): number {
+    	return JactParser.RULE_variableMemoryTypeDeclaration;
+	}
+	public enterRule(listener: JactListener): void {
+	    if(listener.enterVariableMemoryTypeDeclaration) {
+	 		listener.enterVariableMemoryTypeDeclaration(this);
+		}
+	}
+	public exitRule(listener: JactListener): void {
+	    if(listener.exitVariableMemoryTypeDeclaration) {
+	 		listener.exitVariableMemoryTypeDeclaration(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: JactVisitor<Result>): Result {
+		if (visitor.visitVariableMemoryTypeDeclaration) {
+			return visitor.visitVariableMemoryTypeDeclaration(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
+export class ExpressionContext extends ParserRuleContext {
+	constructor(parser?: JactParser, parent?: ParserRuleContext, invokingState?: number) {
+		super(parent, invokingState);
+    	this.parser = parser;
+	}
+	public INT(): TerminalNode {
+		return this.getToken(JactParser.INT, 0);
+	}
+	public FLOAT(): TerminalNode {
+		return this.getToken(JactParser.FLOAT, 0);
+	}
+	public BOOL(): TerminalNode {
+		return this.getToken(JactParser.BOOL, 0);
+	}
+	public STRING(): TerminalNode {
+		return this.getToken(JactParser.STRING, 0);
+	}
+	public ID(): TerminalNode {
+		return this.getToken(JactParser.ID, 0);
+	}
+	public functionDeclaration(): FunctionDeclarationContext {
+		return this.getTypedRuleContext(FunctionDeclarationContext, 0) as FunctionDeclarationContext;
+	}
+    public get ruleIndex(): number {
+    	return JactParser.RULE_expression;
+	}
+	public enterRule(listener: JactListener): void {
+	    if(listener.enterExpression) {
+	 		listener.enterExpression(this);
+		}
+	}
+	public exitRule(listener: JactListener): void {
+	    if(listener.exitExpression) {
+	 		listener.exitExpression(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: JactVisitor<Result>): Result {
+		if (visitor.visitExpression) {
+			return visitor.visitExpression(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
+export class FunctionDeclarationContext extends ParserRuleContext {
+	constructor(parser?: JactParser, parent?: ParserRuleContext, invokingState?: number) {
+		super(parent, invokingState);
+    	this.parser = parser;
+	}
+	public ID(): TerminalNode {
+		return this.getToken(JactParser.ID, 0);
+	}
+	public parameterList(): ParameterListContext {
+		return this.getTypedRuleContext(ParameterListContext, 0) as ParameterListContext;
+	}
+	public statement_list(): StatementContext[] {
+		return this.getTypedRuleContexts(StatementContext) as StatementContext[];
+	}
+	public statement(i: number): StatementContext {
+		return this.getTypedRuleContext(StatementContext, i) as StatementContext;
+	}
+    public get ruleIndex(): number {
+    	return JactParser.RULE_functionDeclaration;
+	}
+	public enterRule(listener: JactListener): void {
+	    if(listener.enterFunctionDeclaration) {
+	 		listener.enterFunctionDeclaration(this);
+		}
+	}
+	public exitRule(listener: JactListener): void {
+	    if(listener.exitFunctionDeclaration) {
+	 		listener.exitFunctionDeclaration(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: JactVisitor<Result>): Result {
+		if (visitor.visitFunctionDeclaration) {
+			return visitor.visitFunctionDeclaration(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
+export class ParameterListContext extends ParserRuleContext {
+	constructor(parser?: JactParser, parent?: ParserRuleContext, invokingState?: number) {
+		super(parent, invokingState);
+    	this.parser = parser;
+	}
+	public parameter_list(): ParameterContext[] {
+		return this.getTypedRuleContexts(ParameterContext) as ParameterContext[];
+	}
+	public parameter(i: number): ParameterContext {
+		return this.getTypedRuleContext(ParameterContext, i) as ParameterContext;
+	}
+    public get ruleIndex(): number {
+    	return JactParser.RULE_parameterList;
+	}
+	public enterRule(listener: JactListener): void {
+	    if(listener.enterParameterList) {
+	 		listener.enterParameterList(this);
+		}
+	}
+	public exitRule(listener: JactListener): void {
+	    if(listener.exitParameterList) {
+	 		listener.exitParameterList(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: JactVisitor<Result>): Result {
+		if (visitor.visitParameterList) {
+			return visitor.visitParameterList(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
+export class ParameterContext extends ParserRuleContext {
+	constructor(parser?: JactParser, parent?: ParserRuleContext, invokingState?: number) {
+		super(parent, invokingState);
+    	this.parser = parser;
+	}
+	public ID(): TerminalNode {
+		return this.getToken(JactParser.ID, 0);
+	}
+	public builtInType(): BuiltInTypeContext {
+		return this.getTypedRuleContext(BuiltInTypeContext, 0) as BuiltInTypeContext;
+	}
+    public get ruleIndex(): number {
+    	return JactParser.RULE_parameter;
+	}
+	public enterRule(listener: JactListener): void {
+	    if(listener.enterParameter) {
+	 		listener.enterParameter(this);
+		}
+	}
+	public exitRule(listener: JactListener): void {
+	    if(listener.exitParameter) {
+	 		listener.exitParameter(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: JactVisitor<Result>): Result {
+		if (visitor.visitParameter) {
+			return visitor.visitParameter(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
+export class BuiltInTypeContext extends ParserRuleContext {
+	constructor(parser?: JactParser, parent?: ParserRuleContext, invokingState?: number) {
+		super(parent, invokingState);
+    	this.parser = parser;
+	}
+	public VOID(): TerminalNode {
+		return this.getToken(JactParser.VOID, 0);
+	}
+    public get ruleIndex(): number {
+    	return JactParser.RULE_builtInType;
+	}
+	public enterRule(listener: JactListener): void {
+	    if(listener.enterBuiltInType) {
+	 		listener.enterBuiltInType(this);
+		}
+	}
+	public exitRule(listener: JactListener): void {
+	    if(listener.exitBuiltInType) {
+	 		listener.exitBuiltInType(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: JactVisitor<Result>): Result {
+		if (visitor.visitBuiltInType) {
+			return visitor.visitBuiltInType(this);
 		} else {
 			return visitor.visitChildren(this);
 		}

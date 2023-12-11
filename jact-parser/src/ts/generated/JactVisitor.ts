@@ -3,14 +3,16 @@
 import {ParseTreeVisitor} from 'antlr4';
 
 
-import { ClassDeclarationContext } from "./JactParser";
-import { MemberDeclarationContext } from "./JactParser";
-import { AttributeDeclarationContext } from "./JactParser";
-import { MethodDeclarationContext } from "./JactParser";
-import { TypeContext } from "./JactParser";
-import { BuiltInTypeContext } from "./JactParser";
-import { ParameterListContext } from "./JactParser";
+import { ProgramContext } from "./JactParser";
 import { StatementContext } from "./JactParser";
+import { PrintStatementContext } from "./JactParser";
+import { VariableDeclarationContext } from "./JactParser";
+import { VariableMemoryTypeDeclarationContext } from "./JactParser";
+import { ExpressionContext } from "./JactParser";
+import { FunctionDeclarationContext } from "./JactParser";
+import { ParameterListContext } from "./JactParser";
+import { ParameterContext } from "./JactParser";
+import { BuiltInTypeContext } from "./JactParser";
 
 
 /**
@@ -22,41 +24,47 @@ import { StatementContext } from "./JactParser";
  */
 export default class JactVisitor<Result> extends ParseTreeVisitor<Result> {
 	/**
-	 * Visit a parse tree produced by `JactParser.classDeclaration`.
+	 * Visit a parse tree produced by `JactParser.program`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitClassDeclaration?: (ctx: ClassDeclarationContext) => Result;
+	visitProgram?: (ctx: ProgramContext) => Result;
 	/**
-	 * Visit a parse tree produced by `JactParser.memberDeclaration`.
+	 * Visit a parse tree produced by `JactParser.statement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitMemberDeclaration?: (ctx: MemberDeclarationContext) => Result;
+	visitStatement?: (ctx: StatementContext) => Result;
 	/**
-	 * Visit a parse tree produced by `JactParser.attributeDeclaration`.
+	 * Visit a parse tree produced by `JactParser.printStatement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitAttributeDeclaration?: (ctx: AttributeDeclarationContext) => Result;
+	visitPrintStatement?: (ctx: PrintStatementContext) => Result;
 	/**
-	 * Visit a parse tree produced by `JactParser.methodDeclaration`.
+	 * Visit a parse tree produced by `JactParser.variableDeclaration`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitMethodDeclaration?: (ctx: MethodDeclarationContext) => Result;
+	visitVariableDeclaration?: (ctx: VariableDeclarationContext) => Result;
 	/**
-	 * Visit a parse tree produced by `JactParser.type`.
+	 * Visit a parse tree produced by `JactParser.variableMemoryTypeDeclaration`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitType?: (ctx: TypeContext) => Result;
+	visitVariableMemoryTypeDeclaration?: (ctx: VariableMemoryTypeDeclarationContext) => Result;
 	/**
-	 * Visit a parse tree produced by `JactParser.builtInType`.
+	 * Visit a parse tree produced by `JactParser.expression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitBuiltInType?: (ctx: BuiltInTypeContext) => Result;
+	visitExpression?: (ctx: ExpressionContext) => Result;
+	/**
+	 * Visit a parse tree produced by `JactParser.functionDeclaration`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitFunctionDeclaration?: (ctx: FunctionDeclarationContext) => Result;
 	/**
 	 * Visit a parse tree produced by `JactParser.parameterList`.
 	 * @param ctx the parse tree
@@ -64,10 +72,16 @@ export default class JactVisitor<Result> extends ParseTreeVisitor<Result> {
 	 */
 	visitParameterList?: (ctx: ParameterListContext) => Result;
 	/**
-	 * Visit a parse tree produced by `JactParser.statement`.
+	 * Visit a parse tree produced by `JactParser.parameter`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitStatement?: (ctx: StatementContext) => Result;
+	visitParameter?: (ctx: ParameterContext) => Result;
+	/**
+	 * Visit a parse tree produced by `JactParser.builtInType`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitBuiltInType?: (ctx: BuiltInTypeContext) => Result;
 }
 

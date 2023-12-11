@@ -3,14 +3,16 @@
 import {ParseTreeListener} from "antlr4";
 
 
-import { ClassDeclarationContext } from "./JactParser";
-import { MemberDeclarationContext } from "./JactParser";
-import { AttributeDeclarationContext } from "./JactParser";
-import { MethodDeclarationContext } from "./JactParser";
-import { TypeContext } from "./JactParser";
-import { BuiltInTypeContext } from "./JactParser";
-import { ParameterListContext } from "./JactParser";
+import { ProgramContext } from "./JactParser";
 import { StatementContext } from "./JactParser";
+import { PrintStatementContext } from "./JactParser";
+import { VariableDeclarationContext } from "./JactParser";
+import { VariableMemoryTypeDeclarationContext } from "./JactParser";
+import { ExpressionContext } from "./JactParser";
+import { FunctionDeclarationContext } from "./JactParser";
+import { ParameterListContext } from "./JactParser";
+import { ParameterContext } from "./JactParser";
+import { BuiltInTypeContext } from "./JactParser";
 
 
 /**
@@ -19,65 +21,75 @@ import { StatementContext } from "./JactParser";
  */
 export default class JactListener extends ParseTreeListener {
 	/**
-	 * Enter a parse tree produced by `JactParser.classDeclaration`.
+	 * Enter a parse tree produced by `JactParser.program`.
 	 * @param ctx the parse tree
 	 */
-	enterClassDeclaration?: (ctx: ClassDeclarationContext) => void;
+	enterProgram?: (ctx: ProgramContext) => void;
 	/**
-	 * Exit a parse tree produced by `JactParser.classDeclaration`.
+	 * Exit a parse tree produced by `JactParser.program`.
 	 * @param ctx the parse tree
 	 */
-	exitClassDeclaration?: (ctx: ClassDeclarationContext) => void;
+	exitProgram?: (ctx: ProgramContext) => void;
 	/**
-	 * Enter a parse tree produced by `JactParser.memberDeclaration`.
+	 * Enter a parse tree produced by `JactParser.statement`.
 	 * @param ctx the parse tree
 	 */
-	enterMemberDeclaration?: (ctx: MemberDeclarationContext) => void;
+	enterStatement?: (ctx: StatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `JactParser.memberDeclaration`.
+	 * Exit a parse tree produced by `JactParser.statement`.
 	 * @param ctx the parse tree
 	 */
-	exitMemberDeclaration?: (ctx: MemberDeclarationContext) => void;
+	exitStatement?: (ctx: StatementContext) => void;
 	/**
-	 * Enter a parse tree produced by `JactParser.attributeDeclaration`.
+	 * Enter a parse tree produced by `JactParser.printStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterAttributeDeclaration?: (ctx: AttributeDeclarationContext) => void;
+	enterPrintStatement?: (ctx: PrintStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `JactParser.attributeDeclaration`.
+	 * Exit a parse tree produced by `JactParser.printStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitAttributeDeclaration?: (ctx: AttributeDeclarationContext) => void;
+	exitPrintStatement?: (ctx: PrintStatementContext) => void;
 	/**
-	 * Enter a parse tree produced by `JactParser.methodDeclaration`.
+	 * Enter a parse tree produced by `JactParser.variableDeclaration`.
 	 * @param ctx the parse tree
 	 */
-	enterMethodDeclaration?: (ctx: MethodDeclarationContext) => void;
+	enterVariableDeclaration?: (ctx: VariableDeclarationContext) => void;
 	/**
-	 * Exit a parse tree produced by `JactParser.methodDeclaration`.
+	 * Exit a parse tree produced by `JactParser.variableDeclaration`.
 	 * @param ctx the parse tree
 	 */
-	exitMethodDeclaration?: (ctx: MethodDeclarationContext) => void;
+	exitVariableDeclaration?: (ctx: VariableDeclarationContext) => void;
 	/**
-	 * Enter a parse tree produced by `JactParser.type`.
+	 * Enter a parse tree produced by `JactParser.variableMemoryTypeDeclaration`.
 	 * @param ctx the parse tree
 	 */
-	enterType?: (ctx: TypeContext) => void;
+	enterVariableMemoryTypeDeclaration?: (ctx: VariableMemoryTypeDeclarationContext) => void;
 	/**
-	 * Exit a parse tree produced by `JactParser.type`.
+	 * Exit a parse tree produced by `JactParser.variableMemoryTypeDeclaration`.
 	 * @param ctx the parse tree
 	 */
-	exitType?: (ctx: TypeContext) => void;
+	exitVariableMemoryTypeDeclaration?: (ctx: VariableMemoryTypeDeclarationContext) => void;
 	/**
-	 * Enter a parse tree produced by `JactParser.builtInType`.
+	 * Enter a parse tree produced by `JactParser.expression`.
 	 * @param ctx the parse tree
 	 */
-	enterBuiltInType?: (ctx: BuiltInTypeContext) => void;
+	enterExpression?: (ctx: ExpressionContext) => void;
 	/**
-	 * Exit a parse tree produced by `JactParser.builtInType`.
+	 * Exit a parse tree produced by `JactParser.expression`.
 	 * @param ctx the parse tree
 	 */
-	exitBuiltInType?: (ctx: BuiltInTypeContext) => void;
+	exitExpression?: (ctx: ExpressionContext) => void;
+	/**
+	 * Enter a parse tree produced by `JactParser.functionDeclaration`.
+	 * @param ctx the parse tree
+	 */
+	enterFunctionDeclaration?: (ctx: FunctionDeclarationContext) => void;
+	/**
+	 * Exit a parse tree produced by `JactParser.functionDeclaration`.
+	 * @param ctx the parse tree
+	 */
+	exitFunctionDeclaration?: (ctx: FunctionDeclarationContext) => void;
 	/**
 	 * Enter a parse tree produced by `JactParser.parameterList`.
 	 * @param ctx the parse tree
@@ -89,14 +101,24 @@ export default class JactListener extends ParseTreeListener {
 	 */
 	exitParameterList?: (ctx: ParameterListContext) => void;
 	/**
-	 * Enter a parse tree produced by `JactParser.statement`.
+	 * Enter a parse tree produced by `JactParser.parameter`.
 	 * @param ctx the parse tree
 	 */
-	enterStatement?: (ctx: StatementContext) => void;
+	enterParameter?: (ctx: ParameterContext) => void;
 	/**
-	 * Exit a parse tree produced by `JactParser.statement`.
+	 * Exit a parse tree produced by `JactParser.parameter`.
 	 * @param ctx the parse tree
 	 */
-	exitStatement?: (ctx: StatementContext) => void;
+	exitParameter?: (ctx: ParameterContext) => void;
+	/**
+	 * Enter a parse tree produced by `JactParser.builtInType`.
+	 * @param ctx the parse tree
+	 */
+	enterBuiltInType?: (ctx: BuiltInTypeContext) => void;
+	/**
+	 * Exit a parse tree produced by `JactParser.builtInType`.
+	 * @param ctx the parse tree
+	 */
+	exitBuiltInType?: (ctx: BuiltInTypeContext) => void;
 }
 

@@ -5,8 +5,9 @@ test('parseSourceCode should work', (): void => {
     console.log(obj)
 })
 
-const sourceCode = `
-public class Hello {
-    private final String someText;
-}
+const sourceCode = `const name:string = "jan";
+const birthYear:number = 1980;
+const isAdmin:boolean = true;
+
+print(name);
 `

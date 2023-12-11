@@ -10,7 +10,7 @@ const name:string = "jan";
 const birthYear:number = 1980;
 const isAdmin:boolean = true;
 
-console.log(name, calculateAge(birthYear), isAdmin);
+print(name, calculateAge(birthYear), isAdmin);
 
 export function() {
     return [
