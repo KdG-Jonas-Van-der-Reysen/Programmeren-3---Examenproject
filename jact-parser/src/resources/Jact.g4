@@ -2,11 +2,10 @@ grammar Jact;
 
 program: statement*;
 
-statement: (ID ';') | printStatement | variableDeclaration | functionDeclaration | returnStatement | functionCall | calculationStatement;
+statement: (ID ';') | printStatement | variableDeclaration | functionDeclaration | returnStatement | functionCall;
 printStatement: 'lotzien' '(' expression ')' ';';
 returnStatement: 'kbentkwijt ' statement ';';
-calculationStatement: expression ('+' | '-' | '*' | '/' | '%') expression ';';
-
+// TODO: calculationStatement
 variableDeclaration:
 	variableMemoryTypeDeclaration ' ' ID ':' builtInType ' = ' expression ';';
 
