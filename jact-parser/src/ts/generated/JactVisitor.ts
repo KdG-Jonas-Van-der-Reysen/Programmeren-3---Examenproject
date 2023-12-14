@@ -6,10 +6,13 @@ import {ParseTreeVisitor} from 'antlr4';
 import { ProgramContext } from "./JactParser";
 import { StatementContext } from "./JactParser";
 import { PrintStatementContext } from "./JactParser";
+import { ReturnStatementContext } from "./JactParser";
+import { CalculationStatementContext } from "./JactParser";
 import { VariableDeclarationContext } from "./JactParser";
 import { VariableMemoryTypeDeclarationContext } from "./JactParser";
 import { ExpressionContext } from "./JactParser";
 import { FunctionDeclarationContext } from "./JactParser";
+import { FunctionCallContext } from "./JactParser";
 import { ParameterListContext } from "./JactParser";
 import { ParameterContext } from "./JactParser";
 import { BuiltInTypeContext } from "./JactParser";
@@ -42,6 +45,18 @@ export default class JactVisitor<Result> extends ParseTreeVisitor<Result> {
 	 */
 	visitPrintStatement?: (ctx: PrintStatementContext) => Result;
 	/**
+	 * Visit a parse tree produced by `JactParser.returnStatement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitReturnStatement?: (ctx: ReturnStatementContext) => Result;
+	/**
+	 * Visit a parse tree produced by `JactParser.calculationStatement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitCalculationStatement?: (ctx: CalculationStatementContext) => Result;
+	/**
 	 * Visit a parse tree produced by `JactParser.variableDeclaration`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -65,6 +80,12 @@ export default class JactVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitFunctionDeclaration?: (ctx: FunctionDeclarationContext) => Result;
+	/**
+	 * Visit a parse tree produced by `JactParser.functionCall`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitFunctionCall?: (ctx: FunctionCallContext) => Result;
 	/**
 	 * Visit a parse tree produced by `JactParser.parameterList`.
 	 * @param ctx the parse tree

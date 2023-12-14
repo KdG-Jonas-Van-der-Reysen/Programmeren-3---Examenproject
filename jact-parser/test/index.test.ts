@@ -5,12 +5,13 @@ test('parseSourceCode should work', (): void => {
     console.log(obj)
 })
 
-const sourceCode = `const name:string = "jan";
-const birthYear:number = 1980;
-const isAdmin:boolean = true;
-print(name);
-
-function hello() {
-    print("hi");
+const sourceCode = `doenekeeriet calculateAge(birthYear:numbb) {
+    kbentkwijt 2023 - birthYear;
 }
+
+tzitvast name:tektsje = "jan";
+tzitvast birthYear:nummerke = 1980;
+tzitvast isAdmin:jaofnee = ja;
+
+lotzien(name, calculateAge(birthYear), isAdmin);
 `

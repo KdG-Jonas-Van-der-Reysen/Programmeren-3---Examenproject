@@ -2,18 +2,18 @@
 
 hello.jonassx
 ```js
-function calculateAge(birthYear) {
-    return 2023 - birthYear;
+doenekeeriet calculateAge(birthYear:numbb) {
+    kbentkwijt 2023 - birthYear;
 }
 
-const name:string = "jan";
-const birthYear:number = 1980;
-const isAdmin:boolean = true;
+tzitvast name:tektsje = "jan";
+tzitvast birthYear:nummerke = 1980;
+tzitvast isAdmin:jaofnee = ja;
 
-print(name, calculateAge(birthYear), isAdmin);
+lotzien(name, calculateAge(birthYear), isAdmin);
 
-export function() {
-    return [
+export doenekeeriet Hello() {
+    kbentkwijt [
         <div>
             <h1>Hello there!</h1>
             <h2>Welcome to our website</h2>

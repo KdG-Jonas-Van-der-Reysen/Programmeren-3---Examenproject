@@ -6,10 +6,13 @@ import {ParseTreeListener} from "antlr4";
 import { ProgramContext } from "./JactParser";
 import { StatementContext } from "./JactParser";
 import { PrintStatementContext } from "./JactParser";
+import { ReturnStatementContext } from "./JactParser";
+import { CalculationStatementContext } from "./JactParser";
 import { VariableDeclarationContext } from "./JactParser";
 import { VariableMemoryTypeDeclarationContext } from "./JactParser";
 import { ExpressionContext } from "./JactParser";
 import { FunctionDeclarationContext } from "./JactParser";
+import { FunctionCallContext } from "./JactParser";
 import { ParameterListContext } from "./JactParser";
 import { ParameterContext } from "./JactParser";
 import { BuiltInTypeContext } from "./JactParser";
@@ -51,6 +54,26 @@ export default class JactListener extends ParseTreeListener {
 	 */
 	exitPrintStatement?: (ctx: PrintStatementContext) => void;
 	/**
+	 * Enter a parse tree produced by `JactParser.returnStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterReturnStatement?: (ctx: ReturnStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `JactParser.returnStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitReturnStatement?: (ctx: ReturnStatementContext) => void;
+	/**
+	 * Enter a parse tree produced by `JactParser.calculationStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterCalculationStatement?: (ctx: CalculationStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `JactParser.calculationStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitCalculationStatement?: (ctx: CalculationStatementContext) => void;
+	/**
 	 * Enter a parse tree produced by `JactParser.variableDeclaration`.
 	 * @param ctx the parse tree
 	 */
@@ -90,6 +113,16 @@ export default class JactListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitFunctionDeclaration?: (ctx: FunctionDeclarationContext) => void;
+	/**
+	 * Enter a parse tree produced by `JactParser.functionCall`.
+	 * @param ctx the parse tree
+	 */
+	enterFunctionCall?: (ctx: FunctionCallContext) => void;
+	/**
+	 * Exit a parse tree produced by `JactParser.functionCall`.
+	 * @param ctx the parse tree
+	 */
+	exitFunctionCall?: (ctx: FunctionCallContext) => void;
 	/**
 	 * Enter a parse tree produced by `JactParser.parameterList`.
 	 * @param ctx the parse tree

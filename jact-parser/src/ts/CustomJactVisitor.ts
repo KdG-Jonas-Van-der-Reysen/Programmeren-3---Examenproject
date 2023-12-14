@@ -1,12 +1,29 @@
-import { ExpressionContext, FunctionDeclarationContext, ParameterListContext, PrintStatementContext, StatementContext, VariableDeclarationContext, VariableMemoryTypeDeclarationContext } from './generated/JactParser'
+import { TerminalNode } from 'antlr4'
+import {
+    CalculationStatementContext,
+    ExpressionContext,
+    FunctionDeclarationContext,
+    ParameterContext,
+    ParameterListContext,
+    PrintStatementContext,
+    ReturnStatementContext,
+    StatementContext,
+    VariableDeclarationContext,
+    VariableMemoryTypeDeclarationContext
+} from './generated/JactParser'
 import JactVisitor from './generated/JactVisitor'
 
 export default class CustomJactVisitor extends JactVisitor<string> {
     private readonly _knownAttributes: string[]
 
     constructor() {
+        console.log('In constructor joepie')
         super()
         this._knownAttributes = []
+    }
+
+    visitStatement = (ctx: StatementContext) => {
+        return this.visitChildren(ctx)
     }
 
     /*visitClassDeclaration?: (ctx: ClassDeclarationContext) => {
@@ -14,38 +31,68 @@ export default class CustomJactVisitor extends JactVisitor<string> {
     };
     visitMemberDeclaration?: (ctx: MemberDeclarationContext) => Result;*/
 
-    visitStatement = (ctx: StatementContext) => {
-        return ctx.getText()
-    }
-
     visitPrintStatement = (ctx: PrintStatementContext) => {
         console.log('In print statement declaration!')
         return `console.log(${this.visitExpression(ctx.expression())});`
     }
 
     visitVariableDeclaration = (ctx: VariableDeclarationContext) => {
-        return `${
-            this.visitVariableMemoryTypeDeclaration(ctx.variableMemoryTypeDeclaration())
-        } ${ctx.ID()} = ${this.visitExpression(ctx.expression())};`
+        return `${this.visitVariableMemoryTypeDeclaration(
+            ctx.variableMemoryTypeDeclaration()
+        )} ${ctx.ID()} = ${this.visitExpression(ctx.expression())};`
     }
 
-    visitVariableMemoryTypeDeclaration = (ctx: VariableMemoryTypeDeclarationContext) => {
-        return ctx.getText()
+    visitVariableMemoryTypeDeclaration = (
+        ctx: VariableMemoryTypeDeclarationContext
+    ) => {
+        switch (ctx.getText()) {
+            case 'tzitvast':
+                return 'const'
+            case 'tisvrij':
+                return 'let'
+            case 'tisoud':
+                return 'var'
+        }
     }
 
     visitExpression = (ctx: ExpressionContext) => {
-        return ctx.getText()
+        switch(ctx.getText()) {
+            case 'ja':
+                return 'true'
+            case 'nee':
+                return 'false'
+            default:
+                return ctx.getText()
+        }
+    }
+
+    visitReturnStatement = (ctx: ReturnStatementContext) => {
+        return `return ${this.visitStatement(ctx.statement())};`
+    }
+
+    visitCalculationStatement = (ctx: CalculationStatementContext) => {
+        return 'ik ga nekeer rekenen hé'
     }
 
     visitFunctionDeclaration = (ctx: FunctionDeclarationContext) => {
-        return `function ${ctx.ID()}(${this.visitParameterList(ctx.parameterList())}) {${ctx.statement_list().map((statement) => this.visitStatement(statement)).join('')}}`
+        return `function ${ctx.ID()}(${this.visitParameterList(
+            ctx.parameterList()
+        )}) {${ctx
+            .statement_list()
+            .map((statement) => this.visitStatement(statement))
+            .join('')}}`
     }
-
 
     visitParameterList = (ctx: ParameterListContext) => {
-        return ctx.getText()
+        return ctx
+            .parameter_list()
+            .map((parameter) => this.visitParameter(parameter))
+            .join(',')
     }
 
+    visitParameter = (ctx: ParameterContext) => {
+        return ctx.ID().getText()
+    }
 
     /*visitMethodDeclaration?: (ctx: MethodDeclarationContext) => Result;
     visitType?: (ctx: TypeContext) => Result;

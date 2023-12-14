@@ -2,16 +2,17 @@ grammar Jact;
 
 program: statement*;
 
-statement: (ID ';') | printStatement | variableDeclaration | functionDeclaration | returnStatement | functionCall;
-printStatement: 'print' '(' expression ')' ';';
-returnStatement: 'return' expression ';';
+statement: (ID ';') | printStatement | variableDeclaration | functionDeclaration | returnStatement | functionCall | calculationStatement;
+printStatement: 'lotzien' '(' expression ')' ';';
+returnStatement: 'kbentkwijt ' statement ';';
+calculationStatement: expression ('+' | '-' | '*' | '/' | '%') expression ';';
 
 variableDeclaration:
 	variableMemoryTypeDeclaration ' ' ID ':' builtInType ' = ' expression ';';
 
-variableMemoryTypeDeclaration: 'const' | 'let' | 'var';
+variableMemoryTypeDeclaration: 'tzitvast' | 'tisvrij' | 'tisoud';
 expression: INT | FLOAT | BOOL | STRING | ID | functionDeclaration;
-functionDeclaration: 'function' ID '(' parameterList ') {' statement* '}';
+functionDeclaration: 'doenekeeriet ' ID '(' parameterList ') {' statement* '}';
 functionCall: ID '(' parameterList ')';
 parameterList: (parameter (',' parameter)*)?;
 parameter: ID ':' builtInType;
@@ -20,11 +21,10 @@ parameter: ID ':' builtInType;
 ID: [a-zA-Z]+;
 INT: [0-9]+;
 FLOAT: [0-9]+ '.' [0-9]+;
-BOOL: 'true' | 'false';
+BOOL: 'ja' | 'nee';
 STRING: '"' .*? '"';
-VOID: 'void';
 
-builtInType: 'number' | 'boolean' | 'string' | 'void';
+builtInType: 'nummerke' | 'jaofnee' | 'tekstje';
 
 // Skip whitespace and newlines
 WS: [ \t\r\n]+ -> skip;
