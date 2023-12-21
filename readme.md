@@ -2,16 +2,17 @@
 
 hello.jonassx
 ```js
-doenekeeriet calculateAge(birthYear:numbb) {
+doenekeeriet calculateAge(birthYear:nummerke) {
     kbentkwijt 2023 - birthYear;
 }
 
-tzitvast name:tektsje = "jan";
+tzitvast name:tekstje = "jan";
 tzitvast birthYear:nummerke = 1980;
 tzitvast isAdmin:jaofnee = ja;
 
-lotzien(name, calculateAge(birthYear), isAdmin);
-
+lotzien(name);
+lotzien(calculateAge(birthYear));
+lotzien(isAdmin)
 export doenekeeriet Hello() {
     kbentkwijt [
         <div>

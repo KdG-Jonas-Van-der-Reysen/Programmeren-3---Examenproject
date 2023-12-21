@@ -7,14 +7,15 @@ import { ProgramContext } from "./JactParser";
 import { StatementContext } from "./JactParser";
 import { PrintStatementContext } from "./JactParser";
 import { ReturnStatementContext } from "./JactParser";
-import { CalculationStatementContext } from "./JactParser";
 import { VariableDeclarationContext } from "./JactParser";
 import { VariableMemoryTypeDeclarationContext } from "./JactParser";
 import { ExpressionContext } from "./JactParser";
 import { FunctionDeclarationContext } from "./JactParser";
 import { FunctionCallContext } from "./JactParser";
 import { ParameterListContext } from "./JactParser";
+import { UntypedParameterListContext } from "./JactParser";
 import { ParameterContext } from "./JactParser";
+import { CalculationStatementContext } from "./JactParser";
 import { BuiltInTypeContext } from "./JactParser";
 
 
@@ -63,16 +64,6 @@ export default class JactListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitReturnStatement?: (ctx: ReturnStatementContext) => void;
-	/**
-	 * Enter a parse tree produced by `JactParser.calculationStatement`.
-	 * @param ctx the parse tree
-	 */
-	enterCalculationStatement?: (ctx: CalculationStatementContext) => void;
-	/**
-	 * Exit a parse tree produced by `JactParser.calculationStatement`.
-	 * @param ctx the parse tree
-	 */
-	exitCalculationStatement?: (ctx: CalculationStatementContext) => void;
 	/**
 	 * Enter a parse tree produced by `JactParser.variableDeclaration`.
 	 * @param ctx the parse tree
@@ -134,6 +125,16 @@ export default class JactListener extends ParseTreeListener {
 	 */
 	exitParameterList?: (ctx: ParameterListContext) => void;
 	/**
+	 * Enter a parse tree produced by `JactParser.untypedParameterList`.
+	 * @param ctx the parse tree
+	 */
+	enterUntypedParameterList?: (ctx: UntypedParameterListContext) => void;
+	/**
+	 * Exit a parse tree produced by `JactParser.untypedParameterList`.
+	 * @param ctx the parse tree
+	 */
+	exitUntypedParameterList?: (ctx: UntypedParameterListContext) => void;
+	/**
 	 * Enter a parse tree produced by `JactParser.parameter`.
 	 * @param ctx the parse tree
 	 */
@@ -143,6 +144,16 @@ export default class JactListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitParameter?: (ctx: ParameterContext) => void;
+	/**
+	 * Enter a parse tree produced by `JactParser.calculationStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterCalculationStatement?: (ctx: CalculationStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `JactParser.calculationStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitCalculationStatement?: (ctx: CalculationStatementContext) => void;
 	/**
 	 * Enter a parse tree produced by `JactParser.builtInType`.
 	 * @param ctx the parse tree

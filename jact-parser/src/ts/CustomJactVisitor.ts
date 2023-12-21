@@ -2,12 +2,14 @@ import { TerminalNode } from 'antlr4'
 import {
     CalculationStatementContext,
     ExpressionContext,
+    FunctionCallContext,
     FunctionDeclarationContext,
     ParameterContext,
     ParameterListContext,
     PrintStatementContext,
     ReturnStatementContext,
     StatementContext,
+    UntypedParameterListContext,
     VariableDeclarationContext,
     VariableMemoryTypeDeclarationContext
 } from './generated/JactParser'
@@ -17,7 +19,6 @@ export default class CustomJactVisitor extends JactVisitor<string> {
     private readonly _knownAttributes: string[]
 
     constructor() {
-        console.log('In constructor joepie')
         super()
         this._knownAttributes = []
     }
@@ -32,14 +33,31 @@ export default class CustomJactVisitor extends JactVisitor<string> {
     visitMemberDeclaration?: (ctx: MemberDeclarationContext) => Result;*/
 
     visitPrintStatement = (ctx: PrintStatementContext) => {
-        console.log('In print statement declaration!')
-        return `console.log(${this.visitExpression(ctx.expression())});`
+        let expression = null
+
+        if(ctx.functionCall()) {
+            expression = this.visitFunctionCall(ctx.functionCall())
+        } else if (ctx.calculationStatement()) {
+            expression = this.visitCalculationStatement(ctx.calculationStatement())
+        } else if (ctx.expression()) {
+            expression = this.visitExpression(ctx.expression())
+        }
+
+        return `console.log(${expression});`
     }
 
     visitVariableDeclaration = (ctx: VariableDeclarationContext) => {
         return `${this.visitVariableMemoryTypeDeclaration(
             ctx.variableMemoryTypeDeclaration()
         )} ${ctx.ID()} = ${this.visitExpression(ctx.expression())};`
+    }
+
+    visitFunctionCall = (ctx: FunctionCallContext) => {
+        return `${ctx.ID()}(${this.visitUntypedParameterList(ctx.untypedParameterList())})`
+    }
+
+    visitUntypedParameterList = (ctx: UntypedParameterListContext) => {
+        return ctx.ID_list().map((id) => id.getText()).join(',')
     }
 
     visitVariableMemoryTypeDeclaration = (
@@ -71,7 +89,7 @@ export default class CustomJactVisitor extends JactVisitor<string> {
     }
 
     visitCalculationStatement = (ctx: CalculationStatementContext) => {
-        return 'ik ga nekeer rekenen hé'
+        return `${this.visitExpression(ctx.expression_list()[0])} ${ctx.OPERATOR()} ${this.visitExpression(ctx.expression_list()[1])}}`
     }
 
     visitFunctionDeclaration = (ctx: FunctionDeclarationContext) => {
@@ -79,7 +97,7 @@ export default class CustomJactVisitor extends JactVisitor<string> {
             ctx.parameterList()
         )}) {${ctx
             .statement_list()
-            .map((statement) => this.visitStatement(statement))
+            .map((statement) => this.visitChildren(statement))
             .join('')}}`
     }
 
