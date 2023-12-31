@@ -13,7 +13,7 @@ tzitvast isAdmin:jaofnee = ja;
 lotzien(name);
 lotzien(calculateAge(birthYear));
 lotzien(isAdmin)
-export doenekeeriet Hello() {
+exporteer doenekeeriet Hello() {
     kbentkwijt [
         <div>
             <h1>Hello there!</h1>

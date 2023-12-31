@@ -2,10 +2,14 @@ grammar Jact;
 
 program: statement*;
 
-statement: (ID ';') | printStatement | variableDeclaration | functionDeclaration | returnStatement | functionCall | calculationStatement;
+statement: (ID ';') | printStatement | variableDeclaration | functionDeclaration | returnStatement | functionCall | calculationStatement | exportStatement;
 printStatement: 'lotzien' '(' (functionCall  | calculationStatement | expression) ')' ';';
-returnStatement: 'kbentkwijt ' statement ';';
-// TODO: calculationStatement
+returnStatement: 'kbentkwijt ' statement | jactCode ';';
+exportStatement: 'exporteer ' statement ';';
+jactCode: '[' jactElement* ']';
+jactElement: '<'jactElementName'>'(jactElement | .+? )*'</'jactElementName'>';
+jactElementName: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div' | 'p' | 'span';
+
 variableDeclaration:
 	variableMemoryTypeDeclaration ' ' ID ':' builtInType ' = ' expression ';';
 

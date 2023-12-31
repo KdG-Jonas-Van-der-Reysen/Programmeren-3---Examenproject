@@ -7,6 +7,7 @@ import { ProgramContext } from "./JactParser";
 import { StatementContext } from "./JactParser";
 import { PrintStatementContext } from "./JactParser";
 import { ReturnStatementContext } from "./JactParser";
+import { ExportStatementContext } from "./JactParser";
 import { VariableDeclarationContext } from "./JactParser";
 import { VariableMemoryTypeDeclarationContext } from "./JactParser";
 import { ExpressionContext } from "./JactParser";
@@ -64,6 +65,16 @@ export default class JactListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitReturnStatement?: (ctx: ReturnStatementContext) => void;
+	/**
+	 * Enter a parse tree produced by `JactParser.exportStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterExportStatement?: (ctx: ExportStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `JactParser.exportStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitExportStatement?: (ctx: ExportStatementContext) => void;
 	/**
 	 * Enter a parse tree produced by `JactParser.variableDeclaration`.
 	 * @param ctx the parse tree

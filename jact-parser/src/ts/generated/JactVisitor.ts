@@ -7,6 +7,7 @@ import { ProgramContext } from "./JactParser";
 import { StatementContext } from "./JactParser";
 import { PrintStatementContext } from "./JactParser";
 import { ReturnStatementContext } from "./JactParser";
+import { ExportStatementContext } from "./JactParser";
 import { VariableDeclarationContext } from "./JactParser";
 import { VariableMemoryTypeDeclarationContext } from "./JactParser";
 import { ExpressionContext } from "./JactParser";
@@ -51,6 +52,12 @@ export default class JactVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitReturnStatement?: (ctx: ReturnStatementContext) => Result;
+	/**
+	 * Visit a parse tree produced by `JactParser.exportStatement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitExportStatement?: (ctx: ExportStatementContext) => Result;
 	/**
 	 * Visit a parse tree produced by `JactParser.variableDeclaration`.
 	 * @param ctx the parse tree

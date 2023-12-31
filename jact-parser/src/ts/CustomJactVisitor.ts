@@ -1,6 +1,7 @@
 import { TerminalNode } from 'antlr4'
 import {
     CalculationStatementContext,
+    ExportStatementContext,
     ExpressionContext,
     FunctionCallContext,
     FunctionDeclarationContext,
@@ -112,13 +113,7 @@ export default class CustomJactVisitor extends JactVisitor<string> {
         return ctx.ID().getText()
     }
 
-    /*visitMethodDeclaration?: (ctx: MethodDeclarationContext) => Result;
-    visitType?: (ctx: TypeContext) => Result;
-    visitBuiltInType?: (ctx: BuiltInTypeContext) => Result;
-    visitParameterList?: (ctx: ParameterListContext) => Result;*/
-
-    /*visitStatement = (ctx: StatementContext) =>  {
-        // IF ASSIGNMENT
-        return {}
-    }*/
+    visitExportStatement = (ctx: ExportStatementContext) => {
+        return `export ${this.visitStatement(ctx.statement())};`
+    }
 }
