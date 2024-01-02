@@ -1,10 +1,13 @@
 import { TerminalNode } from 'antlr4'
 import {
     CalculationStatementContext,
+    ElementContentContext,
     ExportStatementContext,
     ExpressionContext,
     FunctionCallContext,
     FunctionDeclarationContext,
+    JactCodeContext,
+    JactElementContext,
     ParameterContext,
     ParameterListContext,
     PrintStatementContext,
@@ -25,13 +28,8 @@ export default class CustomJactVisitor extends JactVisitor<string> {
     }
 
     visitStatement = (ctx: StatementContext) => {
-        return this.visitChildren(ctx)
+        return (!!ctx ? this.visit(ctx.getChild(0)) : '')
     }
-
-    /*visitClassDeclaration?: (ctx: ClassDeclarationContext) => {
-        return "";
-    };
-    visitMemberDeclaration?: (ctx: MemberDeclarationContext) => Result;*/
 
     visitPrintStatement = (ctx: PrintStatementContext) => {
         let expression = null
@@ -86,11 +84,32 @@ export default class CustomJactVisitor extends JactVisitor<string> {
     }
 
     visitReturnStatement = (ctx: ReturnStatementContext) => {
-        return `return ${this.visitStatement(ctx.statement())};`
+        return ctx.jactCode() ? this.visitJactCode(ctx.jactCode()) : this.visitStatement(ctx.statement())
+    }
+
+    visitJactCode = (ctx: JactCodeContext) => {
+        return ctx.jactElement_list().map((element) => this.visitJactElement(element)).join('')
+    }
+
+    visitJactElement = (ctx: JactElementContext) => {
+        const elementName = ctx.jactElementName(0).getText()
+        const childrenText = ctx.children.map((child) => {
+            const text: string = this.visit(child)
+
+            if(!text || text.toString().trim() === '') return null
+            console.log('the text is ' + text)
+            return text
+        }).filter(elem => elem != null).join(' + ')
+
+        return `jactRenderer.createElement("${elementName}", ${ctx.children.length === 0 ? '' : childrenText})`
     }
 
     visitCalculationStatement = (ctx: CalculationStatementContext) => {
-        return `${this.visitExpression(ctx.expression_list()[0])} ${ctx.OPERATOR()} ${this.visitExpression(ctx.expression_list()[1])}}`
+        return `${this.visitExpression(ctx.expression_list()[0])} ${ctx.OPERATOR()} ${this.visitExpression(ctx.expression_list()[1])}`
+    }
+
+    visitElementContent = (ctx: ElementContentContext) => {
+        return ctx.getText()
     }
 
     visitFunctionDeclaration = (ctx: FunctionDeclarationContext) => {

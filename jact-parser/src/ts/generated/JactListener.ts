@@ -8,6 +8,10 @@ import { StatementContext } from "./JactParser";
 import { PrintStatementContext } from "./JactParser";
 import { ReturnStatementContext } from "./JactParser";
 import { ExportStatementContext } from "./JactParser";
+import { JactCodeContext } from "./JactParser";
+import { JactElementContext } from "./JactParser";
+import { JactElementNameContext } from "./JactParser";
+import { ElementContentContext } from "./JactParser";
 import { VariableDeclarationContext } from "./JactParser";
 import { VariableMemoryTypeDeclarationContext } from "./JactParser";
 import { ExpressionContext } from "./JactParser";
@@ -75,6 +79,46 @@ export default class JactListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitExportStatement?: (ctx: ExportStatementContext) => void;
+	/**
+	 * Enter a parse tree produced by `JactParser.jactCode`.
+	 * @param ctx the parse tree
+	 */
+	enterJactCode?: (ctx: JactCodeContext) => void;
+	/**
+	 * Exit a parse tree produced by `JactParser.jactCode`.
+	 * @param ctx the parse tree
+	 */
+	exitJactCode?: (ctx: JactCodeContext) => void;
+	/**
+	 * Enter a parse tree produced by `JactParser.jactElement`.
+	 * @param ctx the parse tree
+	 */
+	enterJactElement?: (ctx: JactElementContext) => void;
+	/**
+	 * Exit a parse tree produced by `JactParser.jactElement`.
+	 * @param ctx the parse tree
+	 */
+	exitJactElement?: (ctx: JactElementContext) => void;
+	/**
+	 * Enter a parse tree produced by `JactParser.jactElementName`.
+	 * @param ctx the parse tree
+	 */
+	enterJactElementName?: (ctx: JactElementNameContext) => void;
+	/**
+	 * Exit a parse tree produced by `JactParser.jactElementName`.
+	 * @param ctx the parse tree
+	 */
+	exitJactElementName?: (ctx: JactElementNameContext) => void;
+	/**
+	 * Enter a parse tree produced by `JactParser.elementContent`.
+	 * @param ctx the parse tree
+	 */
+	enterElementContent?: (ctx: ElementContentContext) => void;
+	/**
+	 * Exit a parse tree produced by `JactParser.elementContent`.
+	 * @param ctx the parse tree
+	 */
+	exitElementContent?: (ctx: ElementContentContext) => void;
 	/**
 	 * Enter a parse tree produced by `JactParser.variableDeclaration`.
 	 * @param ctx the parse tree

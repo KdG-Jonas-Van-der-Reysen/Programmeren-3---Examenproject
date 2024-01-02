@@ -38,36 +38,66 @@ export default class JactParser extends Parser {
 	public static readonly T__16 = 17;
 	public static readonly T__17 = 18;
 	public static readonly T__18 = 19;
-	public static readonly ID = 20;
-	public static readonly INT = 21;
-	public static readonly FLOAT = 22;
-	public static readonly BOOL = 23;
-	public static readonly STRING = 24;
-	public static readonly OPERATOR = 25;
-	public static readonly WS = 26;
+	public static readonly T__19 = 20;
+	public static readonly T__20 = 21;
+	public static readonly T__21 = 22;
+	public static readonly T__22 = 23;
+	public static readonly T__23 = 24;
+	public static readonly T__24 = 25;
+	public static readonly T__25 = 26;
+	public static readonly T__26 = 27;
+	public static readonly T__27 = 28;
+	public static readonly T__28 = 29;
+	public static readonly T__29 = 30;
+	public static readonly T__30 = 31;
+	public static readonly T__31 = 32;
+	public static readonly T__32 = 33;
+	public static readonly T__33 = 34;
+	public static readonly T__34 = 35;
+	public static readonly T__35 = 36;
+	public static readonly ID = 37;
+	public static readonly INT = 38;
+	public static readonly FLOAT = 39;
+	public static readonly BOOL = 40;
+	public static readonly STRING = 41;
+	public static readonly OPERATOR = 42;
+	public static readonly WS = 43;
 	public static readonly EOF = Token.EOF;
 	public static readonly RULE_program = 0;
 	public static readonly RULE_statement = 1;
 	public static readonly RULE_printStatement = 2;
 	public static readonly RULE_returnStatement = 3;
 	public static readonly RULE_exportStatement = 4;
-	public static readonly RULE_variableDeclaration = 5;
-	public static readonly RULE_variableMemoryTypeDeclaration = 6;
-	public static readonly RULE_expression = 7;
-	public static readonly RULE_functionDeclaration = 8;
-	public static readonly RULE_functionCall = 9;
-	public static readonly RULE_parameterList = 10;
-	public static readonly RULE_untypedParameterList = 11;
-	public static readonly RULE_parameter = 12;
-	public static readonly RULE_calculationStatement = 13;
-	public static readonly RULE_builtInType = 14;
+	public static readonly RULE_jactCode = 5;
+	public static readonly RULE_jactElement = 6;
+	public static readonly RULE_jactElementName = 7;
+	public static readonly RULE_elementContent = 8;
+	public static readonly RULE_variableDeclaration = 9;
+	public static readonly RULE_variableMemoryTypeDeclaration = 10;
+	public static readonly RULE_expression = 11;
+	public static readonly RULE_functionDeclaration = 12;
+	public static readonly RULE_functionCall = 13;
+	public static readonly RULE_parameterList = 14;
+	public static readonly RULE_untypedParameterList = 15;
+	public static readonly RULE_parameter = 16;
+	public static readonly RULE_calculationStatement = 17;
+	public static readonly RULE_builtInType = 18;
 	public static readonly literalNames: (string | null)[] = [ null, "';'", 
                                                             "'lotzien'", 
                                                             "'('", "')'", 
                                                             "'kbentkwijt '", 
-                                                            "'exporteer'", 
-                                                            "' '", "':'", 
-                                                            "' = '", "'tzitvast'", 
+                                                            "'exporteer '", 
+                                                            "'['", "']'", 
+                                                            "'<'", "'>'", 
+                                                            "'</'", "'h1'", 
+                                                            "'h2'", "'h3'", 
+                                                            "'h4'", "'h5'", 
+                                                            "'h6'", "'div'", 
+                                                            "'p'", "'span'", 
+                                                            "' '", "'!'", 
+                                                            "'.'", "'?'", 
+                                                            "':'", "' = '", 
+                                                            "'tzitvast'", 
                                                             "'tisvrij'", 
                                                             "'tisoud'", 
                                                             "'doenekeeriet '", 
@@ -85,16 +115,26 @@ export default class JactParser extends Parser {
                                                              null, null, 
                                                              null, null, 
                                                              null, null, 
-                                                             "ID", "INT", 
-                                                             "FLOAT", "BOOL", 
-                                                             "STRING", "OPERATOR", 
+                                                             null, null, 
+                                                             null, null, 
+                                                             null, null, 
+                                                             null, null, 
+                                                             null, null, 
+                                                             null, null, 
+                                                             null, null, 
+                                                             null, null, 
+                                                             null, "ID", 
+                                                             "INT", "FLOAT", 
+                                                             "BOOL", "STRING", 
+                                                             "OPERATOR", 
                                                              "WS" ];
 	// tslint:disable:no-trailing-whitespace
 	public static readonly ruleNames: string[] = [
 		"program", "statement", "printStatement", "returnStatement", "exportStatement", 
-		"variableDeclaration", "variableMemoryTypeDeclaration", "expression", 
-		"functionDeclaration", "functionCall", "parameterList", "untypedParameterList", 
-		"parameter", "calculationStatement", "builtInType",
+		"jactCode", "jactElement", "jactElementName", "elementContent", "variableDeclaration", 
+		"variableMemoryTypeDeclaration", "expression", "functionDeclaration", 
+		"functionCall", "parameterList", "untypedParameterList", "parameter", 
+		"calculationStatement", "builtInType",
 	];
 	public get grammarFileName(): string { return "Jact.g4"; }
 	public get literalNames(): (string | null)[] { return JactParser.literalNames; }
@@ -118,17 +158,17 @@ export default class JactParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 33;
+			this.state = 41;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 32521316) !== 0)) {
+			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 2013266148) !== 0) || ((((_la - 37)) & ~0x1F) === 0 && ((1 << (_la - 37)) & 31) !== 0)) {
 				{
 				{
-				this.state = 30;
+				this.state = 38;
 				this.statement();
 				}
 				}
-				this.state = 35;
+				this.state = 43;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
@@ -153,16 +193,16 @@ export default class JactParser extends Parser {
 		let localctx: StatementContext = new StatementContext(this, this._ctx, this.state);
 		this.enterRule(localctx, 2, JactParser.RULE_statement);
 		try {
-			this.state = 45;
+			this.state = 53;
 			this._errHandler.sync(this);
 			switch ( this._interp.adaptivePredict(this._input, 1, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(localctx, 1);
 				{
 				{
-				this.state = 36;
+				this.state = 44;
 				this.match(JactParser.ID);
-				this.state = 37;
+				this.state = 45;
 				this.match(JactParser.T__0);
 				}
 				}
@@ -170,49 +210,49 @@ export default class JactParser extends Parser {
 			case 2:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 38;
+				this.state = 46;
 				this.printStatement();
 				}
 				break;
 			case 3:
 				this.enterOuterAlt(localctx, 3);
 				{
-				this.state = 39;
+				this.state = 47;
 				this.variableDeclaration();
 				}
 				break;
 			case 4:
 				this.enterOuterAlt(localctx, 4);
 				{
-				this.state = 40;
+				this.state = 48;
 				this.functionDeclaration();
 				}
 				break;
 			case 5:
 				this.enterOuterAlt(localctx, 5);
 				{
-				this.state = 41;
+				this.state = 49;
 				this.returnStatement();
 				}
 				break;
 			case 6:
 				this.enterOuterAlt(localctx, 6);
 				{
-				this.state = 42;
+				this.state = 50;
 				this.functionCall();
 				}
 				break;
 			case 7:
 				this.enterOuterAlt(localctx, 7);
 				{
-				this.state = 43;
+				this.state = 51;
 				this.calculationStatement();
 				}
 				break;
 			case 8:
 				this.enterOuterAlt(localctx, 8);
 				{
-				this.state = 44;
+				this.state = 52;
 				this.exportStatement();
 				}
 				break;
@@ -239,35 +279,35 @@ export default class JactParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 47;
+			this.state = 55;
 			this.match(JactParser.T__1);
-			this.state = 48;
+			this.state = 56;
 			this.match(JactParser.T__2);
-			this.state = 52;
+			this.state = 60;
 			this._errHandler.sync(this);
 			switch ( this._interp.adaptivePredict(this._input, 2, this._ctx) ) {
 			case 1:
 				{
-				this.state = 49;
+				this.state = 57;
 				this.functionCall();
 				}
 				break;
 			case 2:
 				{
-				this.state = 50;
+				this.state = 58;
 				this.calculationStatement();
 				}
 				break;
 			case 3:
 				{
-				this.state = 51;
+				this.state = 59;
 				this.expression();
 				}
 				break;
 			}
-			this.state = 54;
+			this.state = 62;
 			this.match(JactParser.T__3);
-			this.state = 55;
+			this.state = 63;
 			this.match(JactParser.T__0);
 			}
 		}
@@ -290,14 +330,29 @@ export default class JactParser extends Parser {
 		let localctx: ReturnStatementContext = new ReturnStatementContext(this, this._ctx, this.state);
 		this.enterRule(localctx, 6, JactParser.RULE_returnStatement);
 		try {
-			this.enterOuterAlt(localctx, 1);
-			{
-			this.state = 57;
-			this.match(JactParser.T__4);
-			this.state = 58;
-			this.statement();
-			this.state = 59;
-			this.match(JactParser.T__0);
+			this.state = 70;
+			this._errHandler.sync(this);
+			switch (this._input.LA(1)) {
+			case 5:
+				this.enterOuterAlt(localctx, 1);
+				{
+				this.state = 65;
+				this.match(JactParser.T__4);
+				this.state = 66;
+				this.statement();
+				}
+				break;
+			case 7:
+				this.enterOuterAlt(localctx, 2);
+				{
+				this.state = 67;
+				this.jactCode();
+				this.state = 68;
+				this.match(JactParser.T__0);
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (re) {
@@ -321,12 +376,207 @@ export default class JactParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 61;
+			this.state = 72;
 			this.match(JactParser.T__5);
-			this.state = 62;
+			this.state = 73;
 			this.statement();
-			this.state = 63;
+			this.state = 74;
 			this.match(JactParser.T__0);
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return localctx;
+	}
+	// @RuleVersion(0)
+	public jactCode(): JactCodeContext {
+		let localctx: JactCodeContext = new JactCodeContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 10, JactParser.RULE_jactCode);
+		let _la: number;
+		try {
+			this.enterOuterAlt(localctx, 1);
+			{
+			this.state = 76;
+			this.match(JactParser.T__6);
+			this.state = 80;
+			this._errHandler.sync(this);
+			_la = this._input.LA(1);
+			while (_la===9) {
+				{
+				{
+				this.state = 77;
+				this.jactElement();
+				}
+				}
+				this.state = 82;
+				this._errHandler.sync(this);
+				_la = this._input.LA(1);
+			}
+			this.state = 83;
+			this.match(JactParser.T__7);
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return localctx;
+	}
+	// @RuleVersion(0)
+	public jactElement(): JactElementContext {
+		let localctx: JactElementContext = new JactElementContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 12, JactParser.RULE_jactElement);
+		let _la: number;
+		try {
+			this.enterOuterAlt(localctx, 1);
+			{
+			this.state = 85;
+			this.match(JactParser.T__8);
+			this.state = 86;
+			this.jactElementName();
+			this.state = 87;
+			this.match(JactParser.T__9);
+			this.state = 92;
+			this._errHandler.sync(this);
+			_la = this._input.LA(1);
+			while (((((_la - 9)) & ~0x1F) === 0 && ((1 << (_la - 9)) & 268496897) !== 0)) {
+				{
+				this.state = 90;
+				this._errHandler.sync(this);
+				switch (this._input.LA(1)) {
+				case 9:
+					{
+					this.state = 88;
+					this.jactElement();
+					}
+					break;
+				case 21:
+				case 22:
+				case 23:
+				case 24:
+				case 37:
+					{
+					this.state = 89;
+					this.elementContent();
+					}
+					break;
+				default:
+					throw new NoViableAltException(this);
+				}
+				}
+				this.state = 94;
+				this._errHandler.sync(this);
+				_la = this._input.LA(1);
+			}
+			this.state = 95;
+			this.match(JactParser.T__10);
+			this.state = 96;
+			this.jactElementName();
+			this.state = 97;
+			this.match(JactParser.T__9);
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return localctx;
+	}
+	// @RuleVersion(0)
+	public jactElementName(): JactElementNameContext {
+		let localctx: JactElementNameContext = new JactElementNameContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 14, JactParser.RULE_jactElementName);
+		let _la: number;
+		try {
+			this.enterOuterAlt(localctx, 1);
+			{
+			this.state = 99;
+			_la = this._input.LA(1);
+			if(!((((_la) & ~0x1F) === 0 && ((1 << _la) & 2093056) !== 0))) {
+			this._errHandler.recoverInline(this);
+			}
+			else {
+				this._errHandler.reportMatch(this);
+			    this.consume();
+			}
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return localctx;
+	}
+	// @RuleVersion(0)
+	public elementContent(): ElementContentContext {
+		let localctx: ElementContentContext = new ElementContentContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 16, JactParser.RULE_elementContent);
+		let _la: number;
+		try {
+			let _alt: number;
+			this.enterOuterAlt(localctx, 1);
+			{
+			this.state = 102;
+			this._errHandler.sync(this);
+			_alt = 1;
+			do {
+				switch (_alt) {
+				case 1:
+					{
+					{
+					this.state = 101;
+					_la = this._input.LA(1);
+					if(!(((((_la - 21)) & ~0x1F) === 0 && ((1 << (_la - 21)) & 65551) !== 0))) {
+					this._errHandler.recoverInline(this);
+					}
+					else {
+						this._errHandler.reportMatch(this);
+					    this.consume();
+					}
+					}
+					}
+					break;
+				default:
+					throw new NoViableAltException(this);
+				}
+				this.state = 104;
+				this._errHandler.sync(this);
+				_alt = this._interp.adaptivePredict(this._input, 7, this._ctx);
+			} while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER);
 			}
 		}
 		catch (re) {
@@ -346,25 +596,25 @@ export default class JactParser extends Parser {
 	// @RuleVersion(0)
 	public variableDeclaration(): VariableDeclarationContext {
 		let localctx: VariableDeclarationContext = new VariableDeclarationContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 10, JactParser.RULE_variableDeclaration);
+		this.enterRule(localctx, 18, JactParser.RULE_variableDeclaration);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 65;
+			this.state = 106;
 			this.variableMemoryTypeDeclaration();
-			this.state = 66;
-			this.match(JactParser.T__6);
-			this.state = 67;
+			this.state = 107;
+			this.match(JactParser.T__20);
+			this.state = 108;
 			this.match(JactParser.ID);
-			this.state = 68;
-			this.match(JactParser.T__7);
-			this.state = 69;
+			this.state = 109;
+			this.match(JactParser.T__24);
+			this.state = 110;
 			this.builtInType();
-			this.state = 70;
-			this.match(JactParser.T__8);
-			this.state = 71;
+			this.state = 111;
+			this.match(JactParser.T__25);
+			this.state = 112;
 			this.expression();
-			this.state = 72;
+			this.state = 113;
 			this.match(JactParser.T__0);
 			}
 		}
@@ -385,14 +635,14 @@ export default class JactParser extends Parser {
 	// @RuleVersion(0)
 	public variableMemoryTypeDeclaration(): VariableMemoryTypeDeclarationContext {
 		let localctx: VariableMemoryTypeDeclarationContext = new VariableMemoryTypeDeclarationContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 12, JactParser.RULE_variableMemoryTypeDeclaration);
+		this.enterRule(localctx, 20, JactParser.RULE_variableMemoryTypeDeclaration);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 74;
+			this.state = 115;
 			_la = this._input.LA(1);
-			if(!((((_la) & ~0x1F) === 0 && ((1 << _la) & 7168) !== 0))) {
+			if(!((((_la) & ~0x1F) === 0 && ((1 << _la) & 939524096) !== 0))) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -418,14 +668,14 @@ export default class JactParser extends Parser {
 	// @RuleVersion(0)
 	public expression(): ExpressionContext {
 		let localctx: ExpressionContext = new ExpressionContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 14, JactParser.RULE_expression);
+		this.enterRule(localctx, 22, JactParser.RULE_expression);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 76;
+			this.state = 117;
 			_la = this._input.LA(1);
-			if(!((((_la) & ~0x1F) === 0 && ((1 << _la) & 32505856) !== 0))) {
+			if(!(((((_la - 37)) & ~0x1F) === 0 && ((1 << (_la - 37)) & 31) !== 0))) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -451,37 +701,37 @@ export default class JactParser extends Parser {
 	// @RuleVersion(0)
 	public functionDeclaration(): FunctionDeclarationContext {
 		let localctx: FunctionDeclarationContext = new FunctionDeclarationContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 16, JactParser.RULE_functionDeclaration);
+		this.enterRule(localctx, 24, JactParser.RULE_functionDeclaration);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 78;
-			this.match(JactParser.T__12);
-			this.state = 79;
+			this.state = 119;
+			this.match(JactParser.T__29);
+			this.state = 120;
 			this.match(JactParser.ID);
-			this.state = 80;
+			this.state = 121;
 			this.match(JactParser.T__2);
-			this.state = 81;
+			this.state = 122;
 			this.parameterList();
-			this.state = 82;
-			this.match(JactParser.T__13);
-			this.state = 86;
+			this.state = 123;
+			this.match(JactParser.T__30);
+			this.state = 127;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 32521316) !== 0)) {
+			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 2013266148) !== 0) || ((((_la - 37)) & ~0x1F) === 0 && ((1 << (_la - 37)) & 31) !== 0)) {
 				{
 				{
-				this.state = 83;
+				this.state = 124;
 				this.statement();
 				}
 				}
-				this.state = 88;
+				this.state = 129;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
-			this.state = 89;
-			this.match(JactParser.T__14);
+			this.state = 130;
+			this.match(JactParser.T__31);
 			}
 		}
 		catch (re) {
@@ -501,17 +751,17 @@ export default class JactParser extends Parser {
 	// @RuleVersion(0)
 	public functionCall(): FunctionCallContext {
 		let localctx: FunctionCallContext = new FunctionCallContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 18, JactParser.RULE_functionCall);
+		this.enterRule(localctx, 26, JactParser.RULE_functionCall);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 91;
+			this.state = 132;
 			this.match(JactParser.ID);
-			this.state = 92;
+			this.state = 133;
 			this.match(JactParser.T__2);
-			this.state = 93;
+			this.state = 134;
 			this.untypedParameterList();
-			this.state = 94;
+			this.state = 135;
 			this.match(JactParser.T__3);
 			}
 		}
@@ -532,31 +782,31 @@ export default class JactParser extends Parser {
 	// @RuleVersion(0)
 	public parameterList(): ParameterListContext {
 		let localctx: ParameterListContext = new ParameterListContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 20, JactParser.RULE_parameterList);
+		this.enterRule(localctx, 28, JactParser.RULE_parameterList);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 104;
+			this.state = 145;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===20) {
+			if (_la===37) {
 				{
-				this.state = 96;
+				this.state = 137;
 				this.parameter();
-				this.state = 101;
+				this.state = 142;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				while (_la===16) {
+				while (_la===33) {
 					{
 					{
-					this.state = 97;
-					this.match(JactParser.T__15);
-					this.state = 98;
+					this.state = 138;
+					this.match(JactParser.T__32);
+					this.state = 139;
 					this.parameter();
 					}
 					}
-					this.state = 103;
+					this.state = 144;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
 				}
@@ -582,31 +832,31 @@ export default class JactParser extends Parser {
 	// @RuleVersion(0)
 	public untypedParameterList(): UntypedParameterListContext {
 		let localctx: UntypedParameterListContext = new UntypedParameterListContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 22, JactParser.RULE_untypedParameterList);
+		this.enterRule(localctx, 30, JactParser.RULE_untypedParameterList);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 114;
+			this.state = 155;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===20) {
+			if (_la===37) {
 				{
-				this.state = 106;
+				this.state = 147;
 				this.match(JactParser.ID);
-				this.state = 111;
+				this.state = 152;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				while (_la===16) {
+				while (_la===33) {
 					{
 					{
-					this.state = 107;
-					this.match(JactParser.T__15);
-					this.state = 108;
+					this.state = 148;
+					this.match(JactParser.T__32);
+					this.state = 149;
 					this.match(JactParser.ID);
 					}
 					}
-					this.state = 113;
+					this.state = 154;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
 				}
@@ -632,15 +882,15 @@ export default class JactParser extends Parser {
 	// @RuleVersion(0)
 	public parameter(): ParameterContext {
 		let localctx: ParameterContext = new ParameterContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 24, JactParser.RULE_parameter);
+		this.enterRule(localctx, 32, JactParser.RULE_parameter);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 116;
+			this.state = 157;
 			this.match(JactParser.ID);
-			this.state = 117;
-			this.match(JactParser.T__7);
-			this.state = 118;
+			this.state = 158;
+			this.match(JactParser.T__24);
+			this.state = 159;
 			this.builtInType();
 			}
 		}
@@ -661,20 +911,22 @@ export default class JactParser extends Parser {
 	// @RuleVersion(0)
 	public calculationStatement(): CalculationStatementContext {
 		let localctx: CalculationStatementContext = new CalculationStatementContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 26, JactParser.RULE_calculationStatement);
+		this.enterRule(localctx, 34, JactParser.RULE_calculationStatement);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 120;
+			this.state = 161;
 			this.expression();
-			this.state = 121;
-			this.match(JactParser.T__6);
-			this.state = 122;
+			this.state = 162;
+			this.match(JactParser.T__20);
+			this.state = 163;
 			this.match(JactParser.OPERATOR);
-			this.state = 123;
-			this.match(JactParser.T__6);
-			this.state = 124;
+			this.state = 164;
+			this.match(JactParser.T__20);
+			this.state = 165;
 			this.expression();
+			this.state = 166;
+			this.match(JactParser.T__0);
 			}
 		}
 		catch (re) {
@@ -694,14 +946,14 @@ export default class JactParser extends Parser {
 	// @RuleVersion(0)
 	public builtInType(): BuiltInTypeContext {
 		let localctx: BuiltInTypeContext = new BuiltInTypeContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 28, JactParser.RULE_builtInType);
+		this.enterRule(localctx, 36, JactParser.RULE_builtInType);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 126;
+			this.state = 168;
 			_la = this._input.LA(1);
-			if(!((((_la) & ~0x1F) === 0 && ((1 << _la) & 917504) !== 0))) {
+			if(!(((((_la - 34)) & ~0x1F) === 0 && ((1 << (_la - 34)) & 7) !== 0))) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -725,44 +977,57 @@ export default class JactParser extends Parser {
 		return localctx;
 	}
 
-	public static readonly _serializedATN: number[] = [4,1,26,129,2,0,7,0,2,
+	public static readonly _serializedATN: number[] = [4,1,43,171,2,0,7,0,2,
 	1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,6,2,7,7,7,2,8,7,8,2,9,7,9,2,
-	10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,2,14,7,14,1,0,5,0,32,8,0,10,0,12,
-	0,35,9,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3,1,46,8,1,1,2,1,2,1,2,1,2,
-	1,2,3,2,53,8,2,1,2,1,2,1,2,1,3,1,3,1,3,1,3,1,4,1,4,1,4,1,4,1,5,1,5,1,5,
-	1,5,1,5,1,5,1,5,1,5,1,5,1,6,1,6,1,7,1,7,1,8,1,8,1,8,1,8,1,8,1,8,5,8,85,
-	8,8,10,8,12,8,88,9,8,1,8,1,8,1,9,1,9,1,9,1,9,1,9,1,10,1,10,1,10,5,10,100,
-	8,10,10,10,12,10,103,9,10,3,10,105,8,10,1,11,1,11,1,11,5,11,110,8,11,10,
-	11,12,11,113,9,11,3,11,115,8,11,1,12,1,12,1,12,1,12,1,13,1,13,1,13,1,13,
-	1,13,1,13,1,14,1,14,1,14,0,0,15,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,
-	0,3,1,0,10,12,1,0,20,24,1,0,17,19,128,0,33,1,0,0,0,2,45,1,0,0,0,4,47,1,
-	0,0,0,6,57,1,0,0,0,8,61,1,0,0,0,10,65,1,0,0,0,12,74,1,0,0,0,14,76,1,0,0,
-	0,16,78,1,0,0,0,18,91,1,0,0,0,20,104,1,0,0,0,22,114,1,0,0,0,24,116,1,0,
-	0,0,26,120,1,0,0,0,28,126,1,0,0,0,30,32,3,2,1,0,31,30,1,0,0,0,32,35,1,0,
-	0,0,33,31,1,0,0,0,33,34,1,0,0,0,34,1,1,0,0,0,35,33,1,0,0,0,36,37,5,20,0,
-	0,37,46,5,1,0,0,38,46,3,4,2,0,39,46,3,10,5,0,40,46,3,16,8,0,41,46,3,6,3,
-	0,42,46,3,18,9,0,43,46,3,26,13,0,44,46,3,8,4,0,45,36,1,0,0,0,45,38,1,0,
-	0,0,45,39,1,0,0,0,45,40,1,0,0,0,45,41,1,0,0,0,45,42,1,0,0,0,45,43,1,0,0,
-	0,45,44,1,0,0,0,46,3,1,0,0,0,47,48,5,2,0,0,48,52,5,3,0,0,49,53,3,18,9,0,
-	50,53,3,26,13,0,51,53,3,14,7,0,52,49,1,0,0,0,52,50,1,0,0,0,52,51,1,0,0,
-	0,53,54,1,0,0,0,54,55,5,4,0,0,55,56,5,1,0,0,56,5,1,0,0,0,57,58,5,5,0,0,
-	58,59,3,2,1,0,59,60,5,1,0,0,60,7,1,0,0,0,61,62,5,6,0,0,62,63,3,2,1,0,63,
-	64,5,1,0,0,64,9,1,0,0,0,65,66,3,12,6,0,66,67,5,7,0,0,67,68,5,20,0,0,68,
-	69,5,8,0,0,69,70,3,28,14,0,70,71,5,9,0,0,71,72,3,14,7,0,72,73,5,1,0,0,73,
-	11,1,0,0,0,74,75,7,0,0,0,75,13,1,0,0,0,76,77,7,1,0,0,77,15,1,0,0,0,78,79,
-	5,13,0,0,79,80,5,20,0,0,80,81,5,3,0,0,81,82,3,20,10,0,82,86,5,14,0,0,83,
-	85,3,2,1,0,84,83,1,0,0,0,85,88,1,0,0,0,86,84,1,0,0,0,86,87,1,0,0,0,87,89,
-	1,0,0,0,88,86,1,0,0,0,89,90,5,15,0,0,90,17,1,0,0,0,91,92,5,20,0,0,92,93,
-	5,3,0,0,93,94,3,22,11,0,94,95,5,4,0,0,95,19,1,0,0,0,96,101,3,24,12,0,97,
-	98,5,16,0,0,98,100,3,24,12,0,99,97,1,0,0,0,100,103,1,0,0,0,101,99,1,0,0,
-	0,101,102,1,0,0,0,102,105,1,0,0,0,103,101,1,0,0,0,104,96,1,0,0,0,104,105,
-	1,0,0,0,105,21,1,0,0,0,106,111,5,20,0,0,107,108,5,16,0,0,108,110,5,20,0,
-	0,109,107,1,0,0,0,110,113,1,0,0,0,111,109,1,0,0,0,111,112,1,0,0,0,112,115,
-	1,0,0,0,113,111,1,0,0,0,114,106,1,0,0,0,114,115,1,0,0,0,115,23,1,0,0,0,
-	116,117,5,20,0,0,117,118,5,8,0,0,118,119,3,28,14,0,119,25,1,0,0,0,120,121,
-	3,14,7,0,121,122,5,7,0,0,122,123,5,25,0,0,123,124,5,7,0,0,124,125,3,14,
-	7,0,125,27,1,0,0,0,126,127,7,2,0,0,127,29,1,0,0,0,8,33,45,52,86,101,104,
-	111,114];
+	10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,2,14,7,14,2,15,7,15,2,16,7,16,2,17,
+	7,17,2,18,7,18,1,0,5,0,40,8,0,10,0,12,0,43,9,0,1,1,1,1,1,1,1,1,1,1,1,1,
+	1,1,1,1,1,1,3,1,54,8,1,1,2,1,2,1,2,1,2,1,2,3,2,61,8,2,1,2,1,2,1,2,1,3,1,
+	3,1,3,1,3,1,3,3,3,71,8,3,1,4,1,4,1,4,1,4,1,5,1,5,5,5,79,8,5,10,5,12,5,82,
+	9,5,1,5,1,5,1,6,1,6,1,6,1,6,1,6,5,6,91,8,6,10,6,12,6,94,9,6,1,6,1,6,1,6,
+	1,6,1,7,1,7,1,8,4,8,103,8,8,11,8,12,8,104,1,9,1,9,1,9,1,9,1,9,1,9,1,9,1,
+	9,1,9,1,10,1,10,1,11,1,11,1,12,1,12,1,12,1,12,1,12,1,12,5,12,126,8,12,10,
+	12,12,12,129,9,12,1,12,1,12,1,13,1,13,1,13,1,13,1,13,1,14,1,14,1,14,5,14,
+	141,8,14,10,14,12,14,144,9,14,3,14,146,8,14,1,15,1,15,1,15,5,15,151,8,15,
+	10,15,12,15,154,9,15,3,15,156,8,15,1,16,1,16,1,16,1,16,1,17,1,17,1,17,1,
+	17,1,17,1,17,1,17,1,18,1,18,1,18,0,0,19,0,2,4,6,8,10,12,14,16,18,20,22,
+	24,26,28,30,32,34,36,0,5,1,0,12,20,2,0,21,24,37,37,1,0,27,29,1,0,37,41,
+	1,0,34,36,171,0,41,1,0,0,0,2,53,1,0,0,0,4,55,1,0,0,0,6,70,1,0,0,0,8,72,
+	1,0,0,0,10,76,1,0,0,0,12,85,1,0,0,0,14,99,1,0,0,0,16,102,1,0,0,0,18,106,
+	1,0,0,0,20,115,1,0,0,0,22,117,1,0,0,0,24,119,1,0,0,0,26,132,1,0,0,0,28,
+	145,1,0,0,0,30,155,1,0,0,0,32,157,1,0,0,0,34,161,1,0,0,0,36,168,1,0,0,0,
+	38,40,3,2,1,0,39,38,1,0,0,0,40,43,1,0,0,0,41,39,1,0,0,0,41,42,1,0,0,0,42,
+	1,1,0,0,0,43,41,1,0,0,0,44,45,5,37,0,0,45,54,5,1,0,0,46,54,3,4,2,0,47,54,
+	3,18,9,0,48,54,3,24,12,0,49,54,3,6,3,0,50,54,3,26,13,0,51,54,3,34,17,0,
+	52,54,3,8,4,0,53,44,1,0,0,0,53,46,1,0,0,0,53,47,1,0,0,0,53,48,1,0,0,0,53,
+	49,1,0,0,0,53,50,1,0,0,0,53,51,1,0,0,0,53,52,1,0,0,0,54,3,1,0,0,0,55,56,
+	5,2,0,0,56,60,5,3,0,0,57,61,3,26,13,0,58,61,3,34,17,0,59,61,3,22,11,0,60,
+	57,1,0,0,0,60,58,1,0,0,0,60,59,1,0,0,0,61,62,1,0,0,0,62,63,5,4,0,0,63,64,
+	5,1,0,0,64,5,1,0,0,0,65,66,5,5,0,0,66,71,3,2,1,0,67,68,3,10,5,0,68,69,5,
+	1,0,0,69,71,1,0,0,0,70,65,1,0,0,0,70,67,1,0,0,0,71,7,1,0,0,0,72,73,5,6,
+	0,0,73,74,3,2,1,0,74,75,5,1,0,0,75,9,1,0,0,0,76,80,5,7,0,0,77,79,3,12,6,
+	0,78,77,1,0,0,0,79,82,1,0,0,0,80,78,1,0,0,0,80,81,1,0,0,0,81,83,1,0,0,0,
+	82,80,1,0,0,0,83,84,5,8,0,0,84,11,1,0,0,0,85,86,5,9,0,0,86,87,3,14,7,0,
+	87,92,5,10,0,0,88,91,3,12,6,0,89,91,3,16,8,0,90,88,1,0,0,0,90,89,1,0,0,
+	0,91,94,1,0,0,0,92,90,1,0,0,0,92,93,1,0,0,0,93,95,1,0,0,0,94,92,1,0,0,0,
+	95,96,5,11,0,0,96,97,3,14,7,0,97,98,5,10,0,0,98,13,1,0,0,0,99,100,7,0,0,
+	0,100,15,1,0,0,0,101,103,7,1,0,0,102,101,1,0,0,0,103,104,1,0,0,0,104,102,
+	1,0,0,0,104,105,1,0,0,0,105,17,1,0,0,0,106,107,3,20,10,0,107,108,5,21,0,
+	0,108,109,5,37,0,0,109,110,5,25,0,0,110,111,3,36,18,0,111,112,5,26,0,0,
+	112,113,3,22,11,0,113,114,5,1,0,0,114,19,1,0,0,0,115,116,7,2,0,0,116,21,
+	1,0,0,0,117,118,7,3,0,0,118,23,1,0,0,0,119,120,5,30,0,0,120,121,5,37,0,
+	0,121,122,5,3,0,0,122,123,3,28,14,0,123,127,5,31,0,0,124,126,3,2,1,0,125,
+	124,1,0,0,0,126,129,1,0,0,0,127,125,1,0,0,0,127,128,1,0,0,0,128,130,1,0,
+	0,0,129,127,1,0,0,0,130,131,5,32,0,0,131,25,1,0,0,0,132,133,5,37,0,0,133,
+	134,5,3,0,0,134,135,3,30,15,0,135,136,5,4,0,0,136,27,1,0,0,0,137,142,3,
+	32,16,0,138,139,5,33,0,0,139,141,3,32,16,0,140,138,1,0,0,0,141,144,1,0,
+	0,0,142,140,1,0,0,0,142,143,1,0,0,0,143,146,1,0,0,0,144,142,1,0,0,0,145,
+	137,1,0,0,0,145,146,1,0,0,0,146,29,1,0,0,0,147,152,5,37,0,0,148,149,5,33,
+	0,0,149,151,5,37,0,0,150,148,1,0,0,0,151,154,1,0,0,0,152,150,1,0,0,0,152,
+	153,1,0,0,0,153,156,1,0,0,0,154,152,1,0,0,0,155,147,1,0,0,0,155,156,1,0,
+	0,0,156,31,1,0,0,0,157,158,5,37,0,0,158,159,5,25,0,0,159,160,3,36,18,0,
+	160,33,1,0,0,0,161,162,3,22,11,0,162,163,5,21,0,0,163,164,5,42,0,0,164,
+	165,5,21,0,0,165,166,3,22,11,0,166,167,5,1,0,0,167,35,1,0,0,0,168,169,7,
+	4,0,0,169,37,1,0,0,0,13,41,53,60,70,80,90,92,104,127,142,145,152,155];
 
 	private static __ATN: ATN;
 	public static get _ATN(): ATN {
@@ -912,6 +1177,9 @@ export class ReturnStatementContext extends ParserRuleContext {
 	public statement(): StatementContext {
 		return this.getTypedRuleContext(StatementContext, 0) as StatementContext;
 	}
+	public jactCode(): JactCodeContext {
+		return this.getTypedRuleContext(JactCodeContext, 0) as JactCodeContext;
+	}
     public get ruleIndex(): number {
     	return JactParser.RULE_returnStatement;
 	}
@@ -961,6 +1229,152 @@ export class ExportStatementContext extends ParserRuleContext {
 	public accept<Result>(visitor: JactVisitor<Result>): Result {
 		if (visitor.visitExportStatement) {
 			return visitor.visitExportStatement(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
+export class JactCodeContext extends ParserRuleContext {
+	constructor(parser?: JactParser, parent?: ParserRuleContext, invokingState?: number) {
+		super(parent, invokingState);
+    	this.parser = parser;
+	}
+	public jactElement_list(): JactElementContext[] {
+		return this.getTypedRuleContexts(JactElementContext) as JactElementContext[];
+	}
+	public jactElement(i: number): JactElementContext {
+		return this.getTypedRuleContext(JactElementContext, i) as JactElementContext;
+	}
+    public get ruleIndex(): number {
+    	return JactParser.RULE_jactCode;
+	}
+	public enterRule(listener: JactListener): void {
+	    if(listener.enterJactCode) {
+	 		listener.enterJactCode(this);
+		}
+	}
+	public exitRule(listener: JactListener): void {
+	    if(listener.exitJactCode) {
+	 		listener.exitJactCode(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: JactVisitor<Result>): Result {
+		if (visitor.visitJactCode) {
+			return visitor.visitJactCode(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
+export class JactElementContext extends ParserRuleContext {
+	constructor(parser?: JactParser, parent?: ParserRuleContext, invokingState?: number) {
+		super(parent, invokingState);
+    	this.parser = parser;
+	}
+	public jactElementName_list(): JactElementNameContext[] {
+		return this.getTypedRuleContexts(JactElementNameContext) as JactElementNameContext[];
+	}
+	public jactElementName(i: number): JactElementNameContext {
+		return this.getTypedRuleContext(JactElementNameContext, i) as JactElementNameContext;
+	}
+	public jactElement_list(): JactElementContext[] {
+		return this.getTypedRuleContexts(JactElementContext) as JactElementContext[];
+	}
+	public jactElement(i: number): JactElementContext {
+		return this.getTypedRuleContext(JactElementContext, i) as JactElementContext;
+	}
+	public elementContent_list(): ElementContentContext[] {
+		return this.getTypedRuleContexts(ElementContentContext) as ElementContentContext[];
+	}
+	public elementContent(i: number): ElementContentContext {
+		return this.getTypedRuleContext(ElementContentContext, i) as ElementContentContext;
+	}
+    public get ruleIndex(): number {
+    	return JactParser.RULE_jactElement;
+	}
+	public enterRule(listener: JactListener): void {
+	    if(listener.enterJactElement) {
+	 		listener.enterJactElement(this);
+		}
+	}
+	public exitRule(listener: JactListener): void {
+	    if(listener.exitJactElement) {
+	 		listener.exitJactElement(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: JactVisitor<Result>): Result {
+		if (visitor.visitJactElement) {
+			return visitor.visitJactElement(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
+export class JactElementNameContext extends ParserRuleContext {
+	constructor(parser?: JactParser, parent?: ParserRuleContext, invokingState?: number) {
+		super(parent, invokingState);
+    	this.parser = parser;
+	}
+    public get ruleIndex(): number {
+    	return JactParser.RULE_jactElementName;
+	}
+	public enterRule(listener: JactListener): void {
+	    if(listener.enterJactElementName) {
+	 		listener.enterJactElementName(this);
+		}
+	}
+	public exitRule(listener: JactListener): void {
+	    if(listener.exitJactElementName) {
+	 		listener.exitJactElementName(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: JactVisitor<Result>): Result {
+		if (visitor.visitJactElementName) {
+			return visitor.visitJactElementName(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
+export class ElementContentContext extends ParserRuleContext {
+	constructor(parser?: JactParser, parent?: ParserRuleContext, invokingState?: number) {
+		super(parent, invokingState);
+    	this.parser = parser;
+	}
+	public ID_list(): TerminalNode[] {
+	    	return this.getTokens(JactParser.ID);
+	}
+	public ID(i: number): TerminalNode {
+		return this.getToken(JactParser.ID, i);
+	}
+    public get ruleIndex(): number {
+    	return JactParser.RULE_elementContent;
+	}
+	public enterRule(listener: JactListener): void {
+	    if(listener.enterElementContent) {
+	 		listener.enterElementContent(this);
+		}
+	}
+	public exitRule(listener: JactListener): void {
+	    if(listener.exitElementContent) {
+	 		listener.exitElementContent(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: JactVisitor<Result>): Result {
+		if (visitor.visitElementContent) {
+			return visitor.visitElementContent(this);
 		} else {
 			return visitor.visitChildren(this);
 		}

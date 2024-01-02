@@ -7,9 +7,9 @@ printStatement: 'lotzien' '(' (functionCall  | calculationStatement | expression
 returnStatement: 'kbentkwijt ' statement | jactCode ';';
 exportStatement: 'exporteer ' statement ';';
 jactCode: '[' jactElement* ']';
-jactElement: '<'jactElementName'>'(jactElement | .+? )*'</'jactElementName'>';
+jactElement: '<'jactElementName'>'(jactElement | elementContent )*'</'jactElementName'>';
 jactElementName: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div' | 'p' | 'span';
-
+elementContent: (ID | ' ' | '!' | '.' | '?')+;
 variableDeclaration:
 	variableMemoryTypeDeclaration ' ' ID ':' builtInType ' = ' expression ';';
 
@@ -20,7 +20,7 @@ functionCall: ID '(' untypedParameterList ')';
 parameterList: (parameter (',' parameter)*)?;
 untypedParameterList: (ID (',' ID)*)?;
 parameter: ID ':' builtInType;
-calculationStatement: expression ' ' OPERATOR ' ' expression;
+calculationStatement: expression ' ' OPERATOR ' ' expression ';';
 
 // Primitive types
 ID: [a-zA-Z]+;
