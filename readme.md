@@ -1,18 +1,21 @@
 ### Voorbeeld broncode
 
-hello.jonassx
+hello.jct
+
 ```js
 doenekeeriet calculateAge(birthYear:nummerke) {
-    kbentkwijt 2023 - birthYear;
+    lotzien(birthYear);
 }
 
 tzitvast name:tekstje = "jan";
 tzitvast birthYear:nummerke = 1980;
 tzitvast isAdmin:jaofnee = ja;
 
+calculateAge(birthYear);
+
 lotzien(name);
-lotzien(calculateAge(birthYear));
 lotzien(isAdmin);
+
 exporteer doenekeeriet Hello() {
     kbentkwijt [
         <div>
@@ -27,30 +30,24 @@ exporteer doenekeeriet Hello() {
 
 ```js
 function calculateAge(birthYear) {
-    return 2023 - birthYear;
+  console.log(birthYear);
 }
 
 const name = "jan";
 const birthYear = 1980;
 const isAdmin = true;
 
-console.log(name, calculageAge(birthYear), isAdmin);
+calculateAge(birthYear);
+
+console.log(name);
+console.log(isAdmin);
 
 function Hello() {
-    document.body.createElement("div")
-        .appendChild(
-            document.body.createElement("h1")
-            .appendChild(
-                document.createTextNode("Hello there!")
-            )
-        )
-        .appendChild(
-            document.body.createElement("h2")
-            .appendChild(
-                document.createTextNode("Welcome to our website")
-            )
-        )
-    );
+  document.getElementById("root").innerHTML += jactRenderer.createElement(
+    "div",
+    jactRenderer.createElement("h1", "Hello there!") +
+      jactRenderer.createElement("h2", "Welcome to our website")
+  );
 }
 
 Hello();

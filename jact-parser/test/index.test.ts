@@ -2,20 +2,22 @@ import makeJs from '../src/ts/module'
 
 test('parseSourceCode should work', (): void => {
     const obj: string = makeJs(sourceCode)
-
+    console.log(obj)
 })
 
 const sourceCode = `doenekeeriet calculateAge(birthYear:nummerke) {
-    kbentkwijt 2023 - birthYear;
+    lotzien(birthYear);
 }
 
 tzitvast name:tekstje = "jan";
 tzitvast birthYear:nummerke = 1980;
 tzitvast isAdmin:jaofnee = ja;
 
+calculateAge(1980);
+
 lotzien(name);
-lotzien(calculateAge(birthYear));
 lotzien(isAdmin);
+
 exporteer doenekeeriet Hello() {
     kbentkwijt [
         <div>
@@ -23,4 +25,6 @@ exporteer doenekeeriet Hello() {
             <h2>Welcome to our website</h2>
         </div>
     ];
-};`
+};
+
+Hello();`

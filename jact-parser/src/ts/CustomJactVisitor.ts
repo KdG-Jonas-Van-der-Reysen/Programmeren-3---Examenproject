@@ -10,6 +10,7 @@ import {
     JactElementContext,
     ParameterContext,
     ParameterListContext,
+    PassedParameterContext,
     PrintStatementContext,
     ReturnStatementContext,
     StatementContext,
@@ -52,11 +53,15 @@ export default class CustomJactVisitor extends JactVisitor<string> {
     }
 
     visitFunctionCall = (ctx: FunctionCallContext) => {
-        return `${ctx.ID()}(${this.visitUntypedParameterList(ctx.untypedParameterList())})`
+        return `${ctx.ID()}(${this.visitUntypedParameterList(ctx.untypedParameterList())});`
+    }
+
+    visitPassedParameter = (ctx: PassedParameterContext) => {
+        return ctx.getText()
     }
 
     visitUntypedParameterList = (ctx: UntypedParameterListContext) => {
-        return ctx.ID_list().map((id) => id.getText()).join(',')
+        return ctx.passedParameter_list().map((pp) => this.visit(pp)).join(',')
     }
 
     visitVariableMemoryTypeDeclaration = (
@@ -84,11 +89,11 @@ export default class CustomJactVisitor extends JactVisitor<string> {
     }
 
     visitReturnStatement = (ctx: ReturnStatementContext) => {
-        return ctx.jactCode() ? this.visitJactCode(ctx.jactCode()) : this.visitStatement(ctx.statement())
+        return `${ctx.jactCode() ? this.visitJactCode(ctx.jactCode()) : this.visitStatement(ctx.statement())}`
     }
 
     visitJactCode = (ctx: JactCodeContext) => {
-        return ctx.jactElement_list().map((element) => this.visitJactElement(element)).join('')
+        return `document.getElementById("root").innerHTML += (${ctx.jactElement_list().map((element) => this.visitJactElement(element)).join('')})`
     }
 
     visitJactElement = (ctx: JactElementContext) => {

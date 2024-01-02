@@ -19,6 +19,7 @@ import { FunctionDeclarationContext } from "./JactParser";
 import { FunctionCallContext } from "./JactParser";
 import { ParameterListContext } from "./JactParser";
 import { UntypedParameterListContext } from "./JactParser";
+import { PassedParameterContext } from "./JactParser";
 import { ParameterContext } from "./JactParser";
 import { CalculationStatementContext } from "./JactParser";
 import { BuiltInTypeContext } from "./JactParser";
@@ -189,6 +190,16 @@ export default class JactListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitUntypedParameterList?: (ctx: UntypedParameterListContext) => void;
+	/**
+	 * Enter a parse tree produced by `JactParser.passedParameter`.
+	 * @param ctx the parse tree
+	 */
+	enterPassedParameter?: (ctx: PassedParameterContext) => void;
+	/**
+	 * Exit a parse tree produced by `JactParser.passedParameter`.
+	 * @param ctx the parse tree
+	 */
+	exitPassedParameter?: (ctx: PassedParameterContext) => void;
 	/**
 	 * Enter a parse tree produced by `JactParser.parameter`.
 	 * @param ctx the parse tree

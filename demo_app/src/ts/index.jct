@@ -1,14 +1,16 @@
 doenekeeriet calculateAge(birthYear:nummerke) {
-    kbentkwijt 2023 - birthYear;
+    lotzien(birthYear);
 }
 
 tzitvast name:tekstje = "jan";
 tzitvast birthYear:nummerke = 1980;
 tzitvast isAdmin:jaofnee = ja;
 
+calculateAge(birthYear);
+
 lotzien(name);
-lotzien(calculateAge(birthYear));
 lotzien(isAdmin);
+
 exporteer doenekeeriet Hello() {
     kbentkwijt [
         <div>
@@ -17,3 +19,5 @@ exporteer doenekeeriet Hello() {
         </div>
     ];
 };
+
+Hello();

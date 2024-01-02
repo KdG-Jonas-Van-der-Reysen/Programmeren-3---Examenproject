@@ -1,8 +1,21 @@
 <html>
-    <head>
-        <title>JS Template</title>
-    </head>
-    <body>
-        <div id="root"></div>
-    </body>
+
+<head>
+    <title>JS Template</title>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+
+<script>
+   const jactRenderer = {
+        createElement: (tag, content) => {
+            const element = document.createElement(tag);
+            element.innerHTML = content;
+            return element.outerHTML;
+        }
+    }
+</script>
+
 </html>

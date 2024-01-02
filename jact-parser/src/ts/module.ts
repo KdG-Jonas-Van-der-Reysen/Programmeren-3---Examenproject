@@ -15,7 +15,8 @@ export default function makeJs(inputCode: string): string {
     const visitor = new CustomJactVisitor()
     const obj: any = visitor.visit(context)
 
-    console.log('-------------------' )
+    console.log(context.toStringTree(parser.ruleNames, parser))
+
     return obj.join('')
 
 }

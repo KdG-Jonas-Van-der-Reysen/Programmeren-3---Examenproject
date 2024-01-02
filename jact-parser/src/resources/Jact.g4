@@ -3,7 +3,7 @@ grammar Jact;
 program: statement*;
 
 statement: (ID ';') | printStatement | variableDeclaration | functionDeclaration | returnStatement | functionCall | calculationStatement | exportStatement;
-printStatement: 'lotzien' '(' (functionCall  | calculationStatement | expression) ')' ';';
+printStatement: 'lotzien(' (functionCall  | calculationStatement | expression) ');';
 returnStatement: 'kbentkwijt ' statement | jactCode ';';
 exportStatement: 'exporteer ' statement ';';
 jactCode: '[' jactElement* ']';
@@ -16,9 +16,10 @@ variableDeclaration:
 variableMemoryTypeDeclaration: 'tzitvast' | 'tisvrij' | 'tisoud';
 expression: INT | FLOAT | BOOL | STRING | ID;
 functionDeclaration: 'doenekeeriet ' ID '(' parameterList ') {' statement* '}';
-functionCall: ID '(' untypedParameterList ')';
+functionCall: ID '(' untypedParameterList ');';
 parameterList: (parameter (',' parameter)*)?;
-untypedParameterList: (ID (',' ID)*)?;
+untypedParameterList: (passedParameter (',' passedParameter)*)?;
+passedParameter: (expression | ID);
 parameter: ID ':' builtInType;
 calculationStatement: expression ' ' OPERATOR ' ' expression ';';
 

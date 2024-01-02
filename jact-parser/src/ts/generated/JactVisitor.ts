@@ -19,6 +19,7 @@ import { FunctionDeclarationContext } from "./JactParser";
 import { FunctionCallContext } from "./JactParser";
 import { ParameterListContext } from "./JactParser";
 import { UntypedParameterListContext } from "./JactParser";
+import { PassedParameterContext } from "./JactParser";
 import { ParameterContext } from "./JactParser";
 import { CalculationStatementContext } from "./JactParser";
 import { BuiltInTypeContext } from "./JactParser";
@@ -128,6 +129,12 @@ export default class JactVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitUntypedParameterList?: (ctx: UntypedParameterListContext) => Result;
+	/**
+	 * Visit a parse tree produced by `JactParser.passedParameter`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitPassedParameter?: (ctx: PassedParameterContext) => Result;
 	/**
 	 * Visit a parse tree produced by `JactParser.parameter`.
 	 * @param ctx the parse tree
