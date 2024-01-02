@@ -5,7 +5,7 @@
   "author": "Jonas Van der Reysen",
   "license": "MIT",
   "dependencies": {
-    "webpack-loader-jonas": "file:../webpack-loader-jonas"
+    "jact-loader": "file:../jact-loader"
   },
   "devDependencies": {
       "@babel/core": "^7.19.1",

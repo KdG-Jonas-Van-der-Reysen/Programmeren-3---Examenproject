@@ -3,7 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
 
 module.exports = {
-    entry: './src/ts/index.ts',
+    entry: './src/ts/index.jct',
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist')
@@ -20,10 +20,10 @@ module.exports = {
                 use: [MiniCssExtractPlugin.loader, { loader: 'css-loader' }]
             },
             {
-                test: /\.ts(x?)$/,
+                test: /\.jct$/,
                 use: [
                     {
-                        loader: 'webpack-loader-jonas'
+                        loader: 'jact-loader'
                     }
                 ]
             },

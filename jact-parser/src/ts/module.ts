@@ -4,11 +4,8 @@ import JactParser from './generated/JactParser'
 import CustomJactVisitor from './CustomJactVisitor'
 import * as antlr4 from 'antlr4'
 
-export function forty(): number {
-    return 40
-}
 
-export function makeJs(inputCode: string): unknown {
+export default function makeJs(inputCode: string): string {
     // const chars = new antlr.InputStream(input)
     const chars = new antlr4.CharStream(inputCode)
     const lexer = new JactLexer(chars)
@@ -16,10 +13,9 @@ export function makeJs(inputCode: string): unknown {
     const parser = new JactParser(tokens)
     const context = parser.program()
     const visitor = new CustomJactVisitor()
-    const obj = visitor.visit(context)
+    const obj: any = visitor.visit(context)
 
-    console.log(context.toStringTree(parser.ruleNames, parser))
-    console.log(obj)
-    return obj
+    console.log('-------------------' )
+    return obj.join('')
 
 }

@@ -1,11 +1,4 @@
-import makeJs from '../src/ts/module'
-
-test('parseSourceCode should work', (): void => {
-    const obj: string = makeJs(sourceCode)
-
-})
-
-const sourceCode = `doenekeeriet calculateAge(birthYear:nummerke) {
+doenekeeriet calculateAge(birthYear:nummerke) {
     kbentkwijt 2023 - birthYear;
 }
 
@@ -23,4 +16,4 @@ exporteer doenekeeriet Hello() {
             <h2>Welcome to our website</h2>
         </div>
     ];
-};`
+};

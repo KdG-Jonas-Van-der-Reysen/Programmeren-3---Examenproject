@@ -97,7 +97,6 @@ export default class CustomJactVisitor extends JactVisitor<string> {
             const text: string = this.visit(child)
 
             if(!text || text.toString().trim() === '') return null
-            console.log('the text is ' + text)
             return text
         }).filter(elem => elem != null).join(' + ')
 
@@ -109,7 +108,7 @@ export default class CustomJactVisitor extends JactVisitor<string> {
     }
 
     visitElementContent = (ctx: ElementContentContext) => {
-        return ctx.getText()
+        return `"${ctx.getText()}"`
     }
 
     visitFunctionDeclaration = (ctx: FunctionDeclarationContext) => {
