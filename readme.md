@@ -1,4 +1,47 @@
-### Voorbeeld broncode
+# Jact, the new React
+
+Gemaakt door: Jonas Van der Reysen
+
+## Instructies om te builden & runnen
+
+1. Parser builden
+
+```bash
+cd jact-parser
+npm run build
+```
+
+2. Modules installeren bij de loader
+
+```bash
+cd ..
+cd jact-loader
+npm install
+```
+
+3. Modules installeren bij de demo applicatie
+
+```bash
+cd ..
+cd demo_app
+npm install
+```
+
+4. Demo app runnen
+
+```bash
+npm run build
+```
+Open hierna het index.html bestand van in de /dist folder in de browser. Je ziet in de console ook het resultaat staan van de code hieronder.
+
+## Instructies om te testen
+
+```bash
+cd jact-parser
+npm run test
+```
+
+## Voorbeeld broncode
 
 hello.jct
 
@@ -26,7 +69,7 @@ exporteer doenekeeriet Hello() {
 };
 ```
 
-### Voorbeeld uitvoer
+## Voorbeeld uitvoer
 
 ```js
 function calculateAge(birthYear) {
@@ -53,62 +96,67 @@ function Hello() {
 Hello();
 ```
 
-### ENBF Grammatica
+## ENBF Grammatica
 
 ```ebnf
-program ::= functionDeclaration variableDeclarations consoleLogStatement exportFunction
+JactGrammar = { Statement } ;
 
-functionDeclaration ::= "function" functionName "(" parameters ")" block
+Statement = ( Identifier ';' )
+          | PrintStatement
+          | VariableDeclaration
+          | FunctionDeclaration
+          | ReturnStatement
+          | FunctionCall
+          | CalculationStatement
+          | ExportStatement ;
 
-parameters ::= identifier
+PrintStatement = 'lotzien(' ( FunctionCall | CalculationStatement | Expression ) ');' ;
 
-variableDeclarations ::= "const" variableName ":" typeName "=" literal ";"
+ReturnStatement = 'kbentkwijt' Statement | JactCode ';' ;
 
-consoleLogStatement ::= "console.log" "(" variableName "," functionCall "," variableName ");"
+ExportStatement = 'exporteer' Statement ';' ;
 
-exportFunction ::= "export" "function" block
+JactCode = '[' { JactElement } ']' ;
 
-block ::= "{" jsxElement "}"
+JactElement = '<' JactElementName '>' ( JactElement | ElementContent )* '</' JactElementName '>' ;
 
-jsxElement ::= "<" jsxTagName ">" jsxContent "</" jsxTagName ">"
+JactElementName = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div' | 'p' | 'span' ;
 
-jsxTagName ::= identifier
+ElementContent = ( Identifier | ' ' | '!' | '.' | '?' )+ ;
 
-jsxContent ::= jsxText expression jsxText jsxText
+VariableDeclaration = VariableMemoryTypeDeclaration ' ' Identifier ':' BuiltInType ' = ' Expression ';' ;
 
-jsxText ::= text
+VariableMemoryTypeDeclaration = 'tzitvast' | 'tisvrij' | 'tisoud' ;
 
-expression ::= literal
-           | variableName
-           | functionCall
-           | binaryExpression
+Expression = IntegerLiteral | FloatLiteral | BoolLiteral | StringLiteral | Identifier ;
 
-functionCall ::= functionName "(" arguments ")"
+FunctionDeclaration = 'doenekeeriet' Identifier '(' ParameterList ') {' { Statement* } '}' ;
 
-arguments ::= expression
+FunctionCall = Identifier '(' UntypedParameterList ');' ;
 
-binaryExpression ::= expression binaryOperator expression
+ParameterList = [ Parameter { ',' Parameter } ] ;
 
-literal ::= stringLiteral
-         | numberLiteral
-         | booleanLiteral
+UntypedParameterList = [ PassedParameter { ',' PassedParameter } ] ;
 
-typeName ::= "string" | "number" | "boolean"
+PassedParameter = Expression | Identifier ;
 
-stringLiteral ::= '"' characters '"'
-numberLiteral ::= digit+
-booleanLiteral ::= "true" | "false"
+Parameter = Identifier ':' BuiltInType ;
 
-characters ::= (character | escapeSequence)*
-character ::= any character except '"' and '\'
-escapeSequence ::= '\' any character
+CalculationStatement = Expression OPERATOR Expression ';' ;
 
-functionName ::= identifier
-variableName ::= identifier
+// Primitive types
+Identifier = [a-zA-Z]+ ;
+IntegerLiteral = [0-9]+ ;
+FloatLiteral = [0-9]+ '.' [0-9]+ ;
+BoolLiteral = 'ja' | 'nee' ;
+StringLiteral = '"' .*? '"' ;
 
-identifier ::= letter (letter | digit)*
-letter ::= 'a'..'z' | 'A'..'Z'
-digit ::= '0'..'9'
+BuiltInType = 'nummerke' | 'jaofnee' | 'tekstje' ;
 
-binaryOperator ::= "+" | "-" | "*" | "/" | "%"
+// Operators
+OPERATOR = '+' | '-' | '*' | '/' | '%' | '==' | '!=' | '<' | '>' | '<=' | '>=' | '&&' | '||' | '!' | '++' | '--' ;
+
+// Skip whitespace and newlines
+WS = [ \t\r\n]+ -> skip ;
+
 ```
